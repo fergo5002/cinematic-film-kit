@@ -239,13 +239,18 @@
     },
     {
       "path": ".dockerignore",
-      "bytes": 80,
-      "sha256": "21b01e1c3ae1848587ccac82723fa52b5501ae54c921d9d3c11825587d7ff11a"
+      "bytes": 96,
+      "sha256": "16b1891a8f5cbf8d62266ad18ee7ca05f497a0677e835c4bcead9636433553a8"
     },
     {
       "path": ".env.example",
       "bytes": 536,
       "sha256": "84e54e704a30cfeaf0b0724d01af12956c3a3d17351ac1c608aebc55c2d243bd"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 93,
+      "sha256": "86caf9a38c5ba96c8420af2aa8dd93436e2aac0fa1771227832ff532ea04193d"
     },
     {
       "path": ".github/copilot-instructions.md",
@@ -254,8 +259,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 784,
-      "sha256": "17560bc53925d6360b81333f0d4d72f131bcf7fe691b3874022ee23f731547d8"
+      "bytes": 885,
+      "sha256": "758d1ba82b56e1b9ea0aad98e30a1368a9733e3628e08dfa497750d525d92cc0"
     },
     {
       "path": ".gitignore",
@@ -289,8 +294,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6312,
-      "sha256": "713eef7ec819b39f7868ec0303e605d3993b2368467bb229d1e7d0d7f3a7edb0"
+      "bytes": 6709,
+      "sha256": "e1044fdd57cf933a3c54bd7e7a2569e92ff28e14dc84bdc72ef1c49ca740146e"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -954,8 +959,8 @@
     },
     {
       "path": "tools/package-source.py",
-      "bytes": 2314,
-      "sha256": "8ad25955f360a4776917502bb572e0821eaea8061f173a3e3ce37f69c3685946"
+      "bytes": 3477,
+      "sha256": "c2a451a7a2c8cf95b839d967bc15f1765c6ae6eb51abf1c2a9ff787893a3a4da"
     },
     {
       "path": "tools/packet.mjs",
@@ -1001,6 +1006,11 @@
       "path": "tools/stills.mjs",
       "bytes": 2583,
       "sha256": "2aa62dba90e0f155195131e684cd145c15e9ed438a1f009ea41320cc71047691"
+    },
+    {
+      "path": "tools/test-package-source.py",
+      "bytes": 2275,
+      "sha256": "7353523b2a57e2e626ef0e97695698b2a61d1ead1e563a041983fea441b71107"
     },
     {
       "path": "tools/test/doctor.test.mjs",
