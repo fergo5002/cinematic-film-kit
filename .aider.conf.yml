@@ -1,0 +1,4 @@
+# Aider reads these files at the start of every session.
+read:
+  - AGENTS.md
+  - .agents/skills/cinematic-film/SKILL.md

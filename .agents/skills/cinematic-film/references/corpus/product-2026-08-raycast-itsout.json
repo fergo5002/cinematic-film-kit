@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "source_title": "Raycast: It's out",
+    "source_url": null,
+    "measured": "2026-08-20",
+    "duration_s": 160.659,
+    "width": 1920,
+    "height": 1080,
+    "fps": 24,
+    "vcodec": "av1",
+    "pix_fmt": "yuv420p",
+    "bitrate_kbps": 598,
+    "has_audio": true,
+    "acodec": "aac",
+    "asample_rate": 44100,
+    "achannels": 2
+  },
+  "edit": {
+    "detected_shots": 27,
+    "cuts_per_min": 10.1,
+    "mean_shot_s": 5.95,
+    "median_shot_s": 4.92,
+    "min_shot_s": 2,
+    "max_shot_s": 13.38,
+    "shots_over_2_3s_pct": 92.6,
+    "scene_threshold_pct": 15,
+    "cut_strength_max": 40.2,
+    "cut_strength_mean": 24.7,
+    "cut_candidates_over_40": 1
+  },
+  "picture": {
+    "mean_luma_0_255": 89.4,
+    "mean_luma_pct": 35.1,
+    "luma_sd": 37.2,
+    "luma_min": 17.3,
+    "luma_max": 121.7,
+    "luma_range": 104.4,
+    "mean_motion_energy": 3.765,
+    "settled_fraction": 0.24
+  },
+  "audio": {
+    "integrated_lufs": -14.2,
+    "loudness_range_lu": 2.1,
+    "true_peak_dbtp": -1.1,
+    "mean_volume_db": -16.7,
+    "silent": false
+  },
+  "shots": [
+    {
+      "i": 0,
+      "start": 0,
+      "end": 2.083,
+      "len": 2.083,
+      "mid": 1.042
+    },
+    {
+      "i": 1,
+      "start": 2.083,
+      "end": 6.958,
+      "len": 4.875,
+      "mid": 4.521
+    },
+    {
+      "i": 2,
+      "start": 6.958,
+      "end": 15.042,
+      "len": 8.084,
+      "mid": 11
+    },
+    {
+      "i": 3,
+      "start": 15.042,
+      "end": 24.917,
+      "len": 9.875,
+      "mid": 19.98
+    },
+    {
+      "i": 4,
+      "start": 24.917,
+      "end": 29.75,
+      "len": 4.833,
+      "mid": 27.334
+    },
+    {
+      "i": 5,
+      "start": 29.75,
+      "end": 31.75,
+      "len": 2,
+      "mid": 30.75
+    },
+    {
+      "i": 6,
+      "start": 31.75,
+      "end": 38.083,
+      "len": 6.333,
+      "mid": 34.916
+    },
+    {
+      "i": 7,
+      "start": 38.083,
+      "end": 44.5,
+      "len": 6.417,
+      "mid": 41.291
+    },
+    {
+      "i": 8,
+      "start": 44.5,
+      "end": 47.292,
+      "len": 2.792,
+      "mid": 45.896
+    },
+    {
+      "i": 9,
+      "start": 47.292,
+      "end": 50.667,
+      "len": 3.375,
+      "mid": 48.98
+    },
+    {
+      "i": 10,
+      "start": 50.667,
+      "end": 54.5,
+      "len": 3.833,
+      "mid": 52.584
+    },
+    {
+      "i": 11,
+      "start": 54.5,
+      "end": 58.542,
+      "len": 4.042,
+      "mid": 56.521
+    },
+    {
+      "i": 12,
+      "start": 58.542,
+      "end": 63.458,
+      "len": 4.916,
+      "mid": 61
+    },
+    {
+      "i": 13,
+      "start": 63.458,
+      "end": 67.75,
+      "len": 4.292,
+      "mid": 65.604
+    },
+    {
+      "i": 14,
+      "start": 67.75,
+      "end": 77.667,
+      "len": 9.917,
+      "mid": 72.709
+    },
+    {
+      "i": 15,
+      "start": 77.667,
+      "end": 83.833,
+      "len": 6.166,
+      "mid": 80.75
+    },
+    {
+      "i": 16,
+      "start": 83.833,
+      "end": 88.208,
+      "len": 4.375,
+      "mid": 86.02
+    },
+    {
+      "i": 17,
+      "start": 88.208,
+      "end": 93.75,
+      "len": 5.542,
+      "mid": 90.979
+    },
+    {
+      "i": 18,
+      "start": 93.75,
+      "end": 101.167,
+      "len": 7.417,
+      "mid": 97.459
+    },
+    {
+      "i": 19,
+      "start": 101.167,
+      "end": 106.083,
+      "len": 4.916,
+      "mid": 103.625
+    },
+    {
+      "i": 20,
+      "start": 106.083,
+      "end": 114.167,
+      "len": 8.084,
+      "mid": 110.125
+    },
+    {
+      "i": 21,
+      "start": 114.167,
+      "end": 127.542,
+      "len": 13.375,
+      "mid": 120.855
+    },
+    {
+      "i": 22,
+      "start": 127.542,
+      "end": 138.583,
+      "len": 11.041,
+      "mid": 133.063
+    },
+    {
+      "i": 23,
+      "start": 138.583,
+      "end": 142.875,
+      "len": 4.292,
+      "mid": 140.729
+    },
+    {
+      "i": 24,
+      "start": 142.875,
+      "end": 148.125,
+      "len": 5.25,
+      "mid": 145.5
+    },
+    {
+      "i": 25,
+      "start": 148.125,
+      "end": 151.25,
+      "len": 3.125,
+      "mid": 149.688
+    },
+    {
+      "i": 26,
+      "start": 151.25,
+      "end": 160.659,
+      "len": 9.409,
+      "mid": 155.954
+    }
+  ]
+}

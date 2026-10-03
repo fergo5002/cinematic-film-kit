@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "source_title": "Linear Releases",
+    "source_url": null,
+    "measured": "2026-08-20",
+    "duration_s": 30.07,
+    "width": 1920,
+    "height": 960,
+    "fps": 60,
+    "vcodec": "av1",
+    "pix_fmt": "yuv420p",
+    "bitrate_kbps": 460,
+    "has_audio": true,
+    "acodec": "aac",
+    "asample_rate": 44100,
+    "achannels": 2
+  },
+  "edit": {
+    "detected_shots": 1,
+    "cuts_per_min": 2,
+    "mean_shot_s": 30.07,
+    "median_shot_s": 30.07,
+    "min_shot_s": 30.07,
+    "max_shot_s": 30.07,
+    "shots_over_2_3s_pct": 100,
+    "scene_threshold_pct": 15,
+    "cut_strength_max": 5.2,
+    "cut_strength_mean": 4.5,
+    "cut_candidates_over_40": 0
+  },
+  "picture": {
+    "mean_luma_0_255": 25.1,
+    "mean_luma_pct": 9.8,
+    "luma_sd": 6.2,
+    "luma_min": 15,
+    "luma_max": 34.2,
+    "luma_range": 19.2,
+    "mean_motion_energy": 2.218,
+    "settled_fraction": 0.227
+  },
+  "audio": {
+    "integrated_lufs": -24.7,
+    "loudness_range_lu": 8.4,
+    "true_peak_dbtp": -11.2,
+    "mean_volume_db": -26.8,
+    "silent": false
+  },
+  "shots": [
+    {
+      "i": 0,
+      "start": 0,
+      "end": 30.07,
+      "len": 30.07,
+      "mid": 15.035
+    }
+  ]
+}

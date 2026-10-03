@@ -1,0 +1,17 @@
+Encoders:
+ V..... = Video
+ A..... = Audio
+ S..... = Subtitle
+ .F.... = Frame-level multithreading
+ ..S... = Slice-level multithreading
+ ...X.. = Codec is experimental
+ ....B. = Supports draw_horiz_band
+ .....D = Supports direct rendering method 1
+ ------
+ V....D libx264              libx264 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (codec h264)
+ V....D libx264rgb           libx264 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 RGB (codec h264)
+ V.S..D mpeg4                MPEG-4 part 2
+ VF...D png                  PNG (Portable Network Graphics) image
+ A....D aac                  AAC (Advanced Audio Coding)
+ A....D libmp3lame           libmp3lame MP3 (MPEG audio layer 3) (codec mp3)
+ A....D pcm_s16le            PCM signed 16-bit little-endian
