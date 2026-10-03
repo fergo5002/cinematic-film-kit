@@ -1,7 +1,7 @@
 {
   "name": "cinematic-film-kit",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Make short films with code and any coding agent: Remotion, WebGL shaders, Three.js, a beat grid that drives picture and sound, a synthesised score and gates that measure the result.",
   "type": "module",
   "engines": {

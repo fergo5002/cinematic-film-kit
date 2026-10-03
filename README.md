@@ -31,10 +31,16 @@ The kit's own code is MIT licensed; [Remotion has separate terms](https://www.re
 2. Clone this repository or unzip a [release](https://github.com/fergo5002/cinematic-film-kit/releases).
 3. Open the folder in your agent (or open a terminal in it and start the agent there).
 4. Say: **"Set this kit up and check it works."** The agent runs `npm run doctor`, installs the
-   dependencies with `npm ci` and checks your graphics setup. The first render downloads a
-   headless Chrome of about 110 MB.
+   dependencies with `npm ci`, downloads Chrome Headless Shell with `npx remotion browser ensure`
+   (about 110 MB) and checks your graphics setup.
 
-If you would rather do it yourself: `npm run doctor`, `npm ci`, `npm run doctor` again.
+If you would rather do it yourself:
+
+```sh
+npm ci
+npx remotion browser ensure
+npm run doctor
+```
 
 ## Make your first film
 
