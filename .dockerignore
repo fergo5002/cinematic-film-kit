@@ -1,0 +1,10 @@
+.git
+node_modules
+connectors/node_modules
+out
+dist
+.remotion
+.cache
+film.local.json
+.env
+.env.*

@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "source_title": "What is Claude Code?",
+    "source_url": null,
+    "measured": "2026-08-20",
+    "duration_s": 175.311,
+    "width": 1920,
+    "height": 1080,
+    "fps": 23.976,
+    "vcodec": "av1",
+    "pix_fmt": "yuv420p",
+    "bitrate_kbps": 479,
+    "has_audio": true,
+    "acodec": "aac",
+    "asample_rate": 44100,
+    "achannels": 2
+  },
+  "edit": {
+    "detected_shots": 28,
+    "cuts_per_min": 9.6,
+    "mean_shot_s": 6.26,
+    "median_shot_s": 4.67,
+    "min_shot_s": 1.13,
+    "max_shot_s": 25.4,
+    "shots_over_2_3s_pct": 82.1,
+    "scene_threshold_pct": 15,
+    "cut_strength_max": 51,
+    "cut_strength_mean": 21.2,
+    "cut_candidates_over_40": 3
+  },
+  "picture": {
+    "mean_luma_0_255": 93.8,
+    "mean_luma_pct": 36.8,
+    "luma_sd": 45.5,
+    "luma_min": 15.9,
+    "luma_max": 204,
+    "luma_range": 188.1,
+    "mean_motion_energy": 4.08,
+    "settled_fraction": 0.521
+  },
+  "audio": {
+    "integrated_lufs": -14.7,
+    "loudness_range_lu": 3.5,
+    "true_peak_dbtp": -0.7,
+    "mean_volume_db": -17.9,
+    "silent": false
+  },
+  "shots": [
+    {
+      "i": 0,
+      "start": 0,
+      "end": 7.299,
+      "len": 7.299,
+      "mid": 3.65
+    },
+    {
+      "i": 1,
+      "start": 7.299,
+      "end": 11.47,
+      "len": 4.171,
+      "mid": 9.385
+    },
+    {
+      "i": 2,
+      "start": 11.47,
+      "end": 13.931,
+      "len": 2.461,
+      "mid": 12.7
+    },
+    {
+      "i": 3,
+      "start": 13.931,
+      "end": 16.558,
+      "len": 2.627,
+      "mid": 15.244
+    },
+    {
+      "i": 4,
+      "start": 16.558,
+      "end": 18.852,
+      "len": 2.294,
+      "mid": 17.705
+    },
+    {
+      "i": 5,
+      "start": 18.852,
+      "end": 20.229,
+      "len": 1.377,
+      "mid": 19.541
+    },
+    {
+      "i": 6,
+      "start": 20.229,
+      "end": 21.355,
+      "len": 1.126,
+      "mid": 20.792
+    },
+    {
+      "i": 7,
+      "start": 21.355,
+      "end": 27.069,
+      "len": 5.714,
+      "mid": 24.212
+    },
+    {
+      "i": 8,
+      "start": 27.069,
+      "end": 30.155,
+      "len": 3.086,
+      "mid": 28.612
+    },
+    {
+      "i": 9,
+      "start": 30.155,
+      "end": 39.164,
+      "len": 9.009,
+      "mid": 34.66
+    },
+    {
+      "i": 10,
+      "start": 39.164,
+      "end": 45.629,
+      "len": 6.465,
+      "mid": 42.397
+    },
+    {
+      "i": 11,
+      "start": 45.629,
+      "end": 71.029,
+      "len": 25.4,
+      "mid": 58.329
+    },
+    {
+      "i": 12,
+      "start": 71.029,
+      "end": 82.374,
+      "len": 11.345,
+      "mid": 76.701
+    },
+    {
+      "i": 13,
+      "start": 82.374,
+      "end": 97.306,
+      "len": 14.932,
+      "mid": 89.84
+    },
+    {
+      "i": 14,
+      "start": 97.306,
+      "end": 109.609,
+      "len": 12.303,
+      "mid": 103.457
+    },
+    {
+      "i": 15,
+      "start": 109.609,
+      "end": 119.62,
+      "len": 10.011,
+      "mid": 114.614
+    },
+    {
+      "i": 16,
+      "start": 119.62,
+      "end": 128.003,
+      "len": 8.383,
+      "mid": 123.811
+    },
+    {
+      "i": 17,
+      "start": 128.003,
+      "end": 131.923,
+      "len": 3.92,
+      "mid": 129.963
+    },
+    {
+      "i": 18,
+      "start": 131.923,
+      "end": 136.595,
+      "len": 4.672,
+      "mid": 134.259
+    },
+    {
+      "i": 19,
+      "start": 136.595,
+      "end": 139.598,
+      "len": 3.003,
+      "mid": 138.096
+    },
+    {
+      "i": 20,
+      "start": 139.598,
+      "end": 141.808,
+      "len": 2.21,
+      "mid": 140.703
+    },
+    {
+      "i": 21,
+      "start": 141.808,
+      "end": 149.316,
+      "len": 7.508,
+      "mid": 145.562
+    },
+    {
+      "i": 22,
+      "start": 149.316,
+      "end": 155.906,
+      "len": 6.59,
+      "mid": 152.611
+    },
+    {
+      "i": 23,
+      "start": 155.906,
+      "end": 158.617,
+      "len": 2.711,
+      "mid": 157.262
+    },
+    {
+      "i": 24,
+      "start": 158.617,
+      "end": 163.163,
+      "len": 4.546,
+      "mid": 160.89
+    },
+    {
+      "i": 25,
+      "start": 163.163,
+      "end": 164.706,
+      "len": 1.543,
+      "mid": 163.935
+    },
+    {
+      "i": 26,
+      "start": 164.706,
+      "end": 167.751,
+      "len": 3.045,
+      "mid": 166.228
+    },
+    {
+      "i": 27,
+      "start": 167.751,
+      "end": 175.311,
+      "len": 7.56,
+      "mid": 171.531
+    }
+  ]
+}

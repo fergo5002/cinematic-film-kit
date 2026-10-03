@@ -1,0 +1,11 @@
+Devices:
+ D. = Demuxing supported
+ .E = Muxing supported
+ ---
+  E caca            caca (color ASCII art) output device
+ D  dshow           DirectShow capture
+ D  gdigrab         GDI API Windows frame grabber
+ D  lavfi           Libavfilter virtual input device
+ D  libcdio          
+ D  openal          OpenAL audio capture device
+ D  vfwcap          VfW video capture

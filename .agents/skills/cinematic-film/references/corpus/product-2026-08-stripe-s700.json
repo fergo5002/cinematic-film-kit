@@ -1,0 +1,309 @@
+{
+  "meta": {
+    "source_title": "Stripe Reader S700",
+    "source_url": null,
+    "measured": "2026-08-20",
+    "duration_s": 74.141,
+    "width": 1920,
+    "height": 1080,
+    "fps": 25,
+    "vcodec": "av1",
+    "pix_fmt": "yuv420p",
+    "bitrate_kbps": 846,
+    "has_audio": true,
+    "acodec": "aac",
+    "asample_rate": 44100,
+    "achannels": 2
+  },
+  "edit": {
+    "detected_shots": 37,
+    "cuts_per_min": 29.9,
+    "mean_shot_s": 2,
+    "median_shot_s": 1.52,
+    "min_shot_s": 0.36,
+    "max_shot_s": 6.08,
+    "shots_over_2_3s_pct": 27,
+    "scene_threshold_pct": 15,
+    "cut_strength_max": 81.9,
+    "cut_strength_mean": 18.5,
+    "cut_candidates_over_40": 1
+  },
+  "picture": {
+    "mean_luma_0_255": 129.3,
+    "mean_luma_pct": 50.7,
+    "luma_sd": 35.7,
+    "luma_min": 15.9,
+    "luma_max": 227.7,
+    "luma_range": 211.8,
+    "mean_motion_energy": 9.678,
+    "settled_fraction": 0.077
+  },
+  "audio": {
+    "integrated_lufs": -19.6,
+    "loudness_range_lu": 4.4,
+    "true_peak_dbtp": -2.9,
+    "mean_volume_db": -22.4,
+    "silent": false
+  },
+  "shots": [
+    {
+      "i": 0,
+      "start": 0,
+      "end": 0.36,
+      "len": 0.36,
+      "mid": 0.18
+    },
+    {
+      "i": 1,
+      "start": 0.36,
+      "end": 0.72,
+      "len": 0.36,
+      "mid": 0.54
+    },
+    {
+      "i": 2,
+      "start": 0.72,
+      "end": 1.08,
+      "len": 0.36,
+      "mid": 0.9
+    },
+    {
+      "i": 3,
+      "start": 1.08,
+      "end": 1.44,
+      "len": 0.36,
+      "mid": 1.26
+    },
+    {
+      "i": 4,
+      "start": 1.44,
+      "end": 5.84,
+      "len": 4.4,
+      "mid": 3.64
+    },
+    {
+      "i": 5,
+      "start": 5.84,
+      "end": 9,
+      "len": 3.16,
+      "mid": 7.42
+    },
+    {
+      "i": 6,
+      "start": 9,
+      "end": 14.28,
+      "len": 5.28,
+      "mid": 11.64
+    },
+    {
+      "i": 7,
+      "start": 14.28,
+      "end": 16.36,
+      "len": 2.08,
+      "mid": 15.32
+    },
+    {
+      "i": 8,
+      "start": 16.36,
+      "end": 22,
+      "len": 5.64,
+      "mid": 19.18
+    },
+    {
+      "i": 9,
+      "start": 22,
+      "end": 24.36,
+      "len": 2.36,
+      "mid": 23.18
+    },
+    {
+      "i": 10,
+      "start": 24.36,
+      "end": 25.36,
+      "len": 1,
+      "mid": 24.86
+    },
+    {
+      "i": 11,
+      "start": 25.36,
+      "end": 27.56,
+      "len": 2.2,
+      "mid": 26.46
+    },
+    {
+      "i": 12,
+      "start": 27.56,
+      "end": 28.88,
+      "len": 1.32,
+      "mid": 28.22
+    },
+    {
+      "i": 13,
+      "start": 28.88,
+      "end": 30.64,
+      "len": 1.76,
+      "mid": 29.76
+    },
+    {
+      "i": 14,
+      "start": 30.64,
+      "end": 31.96,
+      "len": 1.32,
+      "mid": 31.3
+    },
+    {
+      "i": 15,
+      "start": 31.96,
+      "end": 32.88,
+      "len": 0.92,
+      "mid": 32.42
+    },
+    {
+      "i": 16,
+      "start": 32.88,
+      "end": 33.64,
+      "len": 0.76,
+      "mid": 33.26
+    },
+    {
+      "i": 17,
+      "start": 33.64,
+      "end": 38.04,
+      "len": 4.4,
+      "mid": 35.84
+    },
+    {
+      "i": 18,
+      "start": 38.04,
+      "end": 38.52,
+      "len": 0.48,
+      "mid": 38.28
+    },
+    {
+      "i": 19,
+      "start": 38.52,
+      "end": 39.04,
+      "len": 0.52,
+      "mid": 38.78
+    },
+    {
+      "i": 20,
+      "start": 39.04,
+      "end": 39.96,
+      "len": 0.92,
+      "mid": 39.5
+    },
+    {
+      "i": 21,
+      "start": 39.96,
+      "end": 41.2,
+      "len": 1.24,
+      "mid": 40.58
+    },
+    {
+      "i": 22,
+      "start": 41.2,
+      "end": 42.8,
+      "len": 1.6,
+      "mid": 42
+    },
+    {
+      "i": 23,
+      "start": 42.8,
+      "end": 44.56,
+      "len": 1.76,
+      "mid": 43.68
+    },
+    {
+      "i": 24,
+      "start": 44.56,
+      "end": 46.08,
+      "len": 1.52,
+      "mid": 45.32
+    },
+    {
+      "i": 25,
+      "start": 46.08,
+      "end": 47.88,
+      "len": 1.8,
+      "mid": 46.98
+    },
+    {
+      "i": 26,
+      "start": 47.88,
+      "end": 52.6,
+      "len": 4.72,
+      "mid": 50.24
+    },
+    {
+      "i": 27,
+      "start": 52.6,
+      "end": 55.36,
+      "len": 2.76,
+      "mid": 53.98
+    },
+    {
+      "i": 28,
+      "start": 55.36,
+      "end": 57.48,
+      "len": 2.12,
+      "mid": 56.42
+    },
+    {
+      "i": 29,
+      "start": 57.48,
+      "end": 58.84,
+      "len": 1.36,
+      "mid": 58.16
+    },
+    {
+      "i": 30,
+      "start": 58.84,
+      "end": 60.4,
+      "len": 1.56,
+      "mid": 59.62
+    },
+    {
+      "i": 31,
+      "start": 60.4,
+      "end": 61.24,
+      "len": 0.84,
+      "mid": 60.82
+    },
+    {
+      "i": 32,
+      "start": 61.24,
+      "end": 62.24,
+      "len": 1,
+      "mid": 61.74
+    },
+    {
+      "i": 33,
+      "start": 62.24,
+      "end": 63.64,
+      "len": 1.4,
+      "mid": 62.94
+    },
+    {
+      "i": 34,
+      "start": 63.64,
+      "end": 66.64,
+      "len": 3,
+      "mid": 65.14
+    },
+    {
+      "i": 35,
+      "start": 66.64,
+      "end": 72.72,
+      "len": 6.08,
+      "mid": 69.68
+    },
+    {
+      "i": 36,
+      "start": 72.72,
+      "end": 74.141,
+      "len": 1.421,
+      "mid": 73.431
+    }
+  ]
+}

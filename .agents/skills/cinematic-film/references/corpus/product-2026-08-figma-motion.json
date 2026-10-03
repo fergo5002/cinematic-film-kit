@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "source_title": "Figma Motion",
+    "source_url": null,
+    "measured": "2026-08-20",
+    "duration_s": 68.151,
+    "width": 1920,
+    "height": 1080,
+    "fps": 12,
+    "vcodec": "av1",
+    "pix_fmt": "yuv420p",
+    "bitrate_kbps": 589,
+    "has_audio": true,
+    "acodec": "aac",
+    "asample_rate": 44100,
+    "achannels": 2
+  },
+  "edit": {
+    "detected_shots": 17,
+    "cuts_per_min": 15,
+    "mean_shot_s": 4.01,
+    "median_shot_s": 3.5,
+    "min_shot_s": 0.5,
+    "max_shot_s": 10.17,
+    "shots_over_2_3s_pct": 58.8,
+    "scene_threshold_pct": 15,
+    "cut_strength_max": 62.9,
+    "cut_strength_mean": 12.2,
+    "cut_candidates_over_40": 3
+  },
+  "picture": {
+    "mean_luma_0_255": 129.9,
+    "mean_luma_pct": 50.9,
+    "luma_sd": 51.5,
+    "luma_min": 18.2,
+    "luma_max": 233.2,
+    "luma_range": 215.1,
+    "mean_motion_energy": 13.114,
+    "settled_fraction": 0.081
+  },
+  "audio": {
+    "integrated_lufs": -13.4,
+    "loudness_range_lu": 1.8,
+    "true_peak_dbtp": -0.5,
+    "mean_volume_db": -14.9,
+    "silent": false
+  },
+  "shots": [
+    {
+      "i": 0,
+      "start": 0,
+      "end": 1.417,
+      "len": 1.417,
+      "mid": 0.709
+    },
+    {
+      "i": 1,
+      "start": 1.417,
+      "end": 6.833,
+      "len": 5.416,
+      "mid": 4.125
+    },
+    {
+      "i": 2,
+      "start": 6.833,
+      "end": 9.833,
+      "len": 3,
+      "mid": 8.333
+    },
+    {
+      "i": 3,
+      "start": 9.833,
+      "end": 11,
+      "len": 1.167,
+      "mid": 10.416
+    },
+    {
+      "i": 4,
+      "start": 11,
+      "end": 15.5,
+      "len": 4.5,
+      "mid": 13.25
+    },
+    {
+      "i": 5,
+      "start": 15.5,
+      "end": 19,
+      "len": 3.5,
+      "mid": 17.25
+    },
+    {
+      "i": 6,
+      "start": 19,
+      "end": 19.5,
+      "len": 0.5,
+      "mid": 19.25
+    },
+    {
+      "i": 7,
+      "start": 19.5,
+      "end": 20,
+      "len": 0.5,
+      "mid": 19.75
+    },
+    {
+      "i": 8,
+      "start": 20,
+      "end": 22,
+      "len": 2,
+      "mid": 21
+    },
+    {
+      "i": 9,
+      "start": 22,
+      "end": 26.583,
+      "len": 4.583,
+      "mid": 24.291
+    },
+    {
+      "i": 10,
+      "start": 26.583,
+      "end": 36.75,
+      "len": 10.167,
+      "mid": 31.666
+    },
+    {
+      "i": 11,
+      "start": 36.75,
+      "end": 44.167,
+      "len": 7.417,
+      "mid": 40.459
+    },
+    {
+      "i": 12,
+      "start": 44.167,
+      "end": 46,
+      "len": 1.833,
+      "mid": 45.084
+    },
+    {
+      "i": 13,
+      "start": 46,
+      "end": 50.5,
+      "len": 4.5,
+      "mid": 48.25
+    },
+    {
+      "i": 14,
+      "start": 50.5,
+      "end": 60.583,
+      "len": 10.083,
+      "mid": 55.541
+    },
+    {
+      "i": 15,
+      "start": 60.583,
+      "end": 62.583,
+      "len": 2,
+      "mid": 61.583
+    },
+    {
+      "i": 16,
+      "start": 62.583,
+      "end": 68.151,
+      "len": 5.568,
+      "mid": 65.367
+    }
+  ]
+}

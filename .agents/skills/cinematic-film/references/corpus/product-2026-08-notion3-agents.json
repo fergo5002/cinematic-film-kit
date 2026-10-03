@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "source_title": "Notion 3.0: Agents",
+    "source_url": null,
+    "measured": "2026-08-20",
+    "duration_s": 90.047,
+    "width": 1920,
+    "height": 1080,
+    "fps": 24,
+    "vcodec": "vp9",
+    "pix_fmt": "yuv420p",
+    "bitrate_kbps": 1095,
+    "has_audio": true,
+    "acodec": "aac",
+    "asample_rate": 44100,
+    "achannels": 2
+  },
+  "edit": {
+    "detected_shots": 2,
+    "cuts_per_min": 1.3,
+    "mean_shot_s": 45.02,
+    "median_shot_s": 57.33,
+    "min_shot_s": 32.71,
+    "max_shot_s": 57.33,
+    "shots_over_2_3s_pct": 100,
+    "scene_threshold_pct": 15,
+    "cut_strength_max": 16.3,
+    "cut_strength_mean": 8.4,
+    "cut_candidates_over_40": 0
+  },
+  "picture": {
+    "mean_luma_0_255": 222.8,
+    "mean_luma_pct": 87.4,
+    "luma_sd": 7.9,
+    "luma_min": 196.9,
+    "luma_max": 234.1,
+    "luma_range": 37.2,
+    "mean_motion_energy": 2.559,
+    "settled_fraction": 0.607
+  },
+  "audio": {
+    "integrated_lufs": -15.2,
+    "loudness_range_lu": 7.4,
+    "true_peak_dbtp": -1,
+    "mean_volume_db": -16.8,
+    "silent": false
+  },
+  "shots": [
+    {
+      "i": 0,
+      "start": 0,
+      "end": 57.333,
+      "len": 57.333,
+      "mid": 28.666
+    },
+    {
+      "i": 1,
+      "start": 57.333,
+      "end": 90.047,
+      "len": 32.714,
+      "mid": 73.69
+    }
+  ]
+}

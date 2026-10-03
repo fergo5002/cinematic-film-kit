@@ -1,0 +1,25 @@
+Filters:
+  T.. = Timeline support
+  .S. = Slice threading
+  ..C = Command support
+  A = Audio input/output
+  V = Video input/output
+  N = Dynamic number and/or type of input/output
+  | = Source or sink filter
+ ... abench            A->A       Benchmark part of a filtergraph.
+ T.C alimiter          A->A       Audio lookahead limiter.
+ ... aresample         A->A       Resample audio data.
+ ... ebur128           A->N       EBU R128 scanner.
+ ... loudnorm          A->A       EBU R128 loudness normalization
+ TSC volume            A->A       Change input volume.
+ ... volumedetect      A->A       Detect audio volume.
+ ... format            V->V       Convert the input video to one of the specified pixel formats.
+ ... fps               V->V       Force constant framerate.
+ ... freezedetect      V->V       Detects frozen video input.
+ T.. metadata          V->V       Manipulate video frame metadata.
+ ..C scale             V->V       Scale the input video size and/or convert the image format.
+ ... select            V->N       Select video frames to pass in output.
+ .S. signalstats       V->V       Generate statistics from video analysis.
+ TS. tblend            V->V       Blend successive frames.
+ ... tile              V->V       Tile several successive frames together.
+ ... showwavespic      A->V       Convert input audio to a video output single picture.

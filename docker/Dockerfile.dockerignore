@@ -1,0 +1,8 @@
+node_modules
+connectors/node_modules
+out
+dist
+film.local.json
+.env
+.env.*
+!.env.example

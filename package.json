@@ -1,0 +1,54 @@
+{
+  "name": "cinematic-film-kit",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Make short films with code and any coding agent: Remotion, WebGL shaders, Three.js, a beat grid that drives picture and sound, a synthesised score and gates that measure the result.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "doctor": "node tools/doctor.mjs",
+    "new-film": "node tools/new-film.mjs",
+    "studio": "remotion studio src/index.ts",
+    "score": "node tools/score.mjs",
+    "stills": "node tools/stills.mjs",
+    "sheet": "node tools/sheet.mjs",
+    "preview": "node tools/render.mjs --preview",
+    "render": "node tools/render.mjs",
+    "master": "node tools/master.mjs",
+    "audit": "node tools/film-audit.mjs",
+    "lint:slop": "node tools/slop-lint.mjs",
+    "packet": "node tools/packet.mjs",
+    "release": "node tools/release.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node tools/run-tests.mjs"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.1",
+    "@remotion/bundler": "4.0.532",
+    "@remotion/cli": "4.0.532",
+    "@remotion/fonts": "4.0.532",
+    "@remotion/layout-utils": "4.0.532",
+    "@remotion/lottie": "4.0.532",
+    "@remotion/media": "4.0.532",
+    "@remotion/motion-blur": "4.0.532",
+    "@remotion/noise": "4.0.532",
+    "@remotion/paths": "4.0.532",
+    "@remotion/renderer": "4.0.532",
+    "@remotion/shapes": "4.0.532",
+    "@remotion/three": "4.0.532",
+    "lottie-web": "5.13.0",
+    "postprocessing": "6.39.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.532",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.186.0",
+    "typescript": "5.9.3"
+  }
+}

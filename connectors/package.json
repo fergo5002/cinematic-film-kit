@@ -1,0 +1,20 @@
+{
+  "name": "film-gen-connectors",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Optional paid generation for the film kit: one CLI, five provider adapters, a local mock, tests and an MCP server. The CLI needs no packages; only the MCP server needs the two below.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "film-gen": "node film-gen.mjs",
+    "mcp": "node mcp/server.mjs",
+    "mock": "node mock/server.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "zod": "4.6.5"
+  }
+}
