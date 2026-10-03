@@ -24,7 +24,8 @@ Read it all once, then read the skill before any film work.
 1. `npm run doctor`. It checks Node (22.18 or newer), ffmpeg and its filters, disk and the browser,
    and prints the exact install command for anything missing. Install what it asks for, with the
    person's permission, then run it again.
-2. `npm ci` (or `npm install`), then `npm run doctor` once more: after install it tests WebGL with
+2. `npm ci` (or `npm install`), then `npx remotion browser ensure` to download Chrome Headless
+   Shell. Run `npm run doctor` once more: after install it tests WebGL with
    each graphics backend and records the one that works in `film.local.json`.
 3. If the folder is not a git repository, `git init` and commit, so every film has history.
 

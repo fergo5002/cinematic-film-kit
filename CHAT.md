@@ -31,7 +31,8 @@ Read it all once, then read the skill before any film work.
 1. `npm run doctor`. It checks Node (22.18 or newer), ffmpeg and its filters, disk and the browser,
    and prints the exact install command for anything missing. Install what it asks for, with the
    person's permission, then run it again.
-2. `npm ci` (or `npm install`), then `npm run doctor` once more: after install it tests WebGL with
+2. `npm ci` (or `npm install`), then `npx remotion browser ensure` to download Chrome Headless
+   Shell. Run `npm run doctor` once more: after install it tests WebGL with
    each graphics backend and records the one that works in `film.local.json`.
 3. If the folder is not a git repository, `git init` and commit, so every film has history.
 
@@ -583,8 +584,7 @@ comes from. Then go back to the idea: that is where most "forgettable" comes fro
 
 A chat assistant cannot run anything on your computer, so you are its hands. When it asks for a
 command, open a terminal in the kit's folder, run it, and paste back what it printed (the last 40
-lines are usually enough). Start with `npm run doctor`, then `npm ci`, then `npm run doctor`
-again.
+lines are usually enough). Run `npm ci`, then `npx remotion browser ensure`, then `npm run doctor`.
 
 When it asks to see something, attach the image: stills land in `out/<id>/stills/`, the contact
 sheet in `out/<id>/sheet.png` and the review packet in `out/<id>/packet/`. Paste file contents it
