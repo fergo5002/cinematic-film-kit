@@ -1,11 +1,11 @@
 {
   "name": "cinematic-film-kit",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "files": [
     {
       "path": ".agents/skills/cinematic-film/SKILL.md",
-      "bytes": 30870,
-      "sha256": "15ebaf7378557c223289fae605eee6374a156f8781596fa6f72b5ade4edd0463"
+      "bytes": 31489,
+      "sha256": "3093e17d130484b6f271747cb1f8f1e8efcebfc9ea12222bbf2e636bd8d1fa43"
     },
     {
       "path": ".agents/skills/cinematic-film/lessons.md",
@@ -204,13 +204,13 @@
     },
     {
       "path": ".agents/skills/cinematic-film/references/sound-design.md",
-      "bytes": 14195,
-      "sha256": "a29502abde92b71bbd3b4bddda383237e530658548fac62045f460d8f500012b"
+      "bytes": 14468,
+      "sha256": "5b87aa43f5f4f57c07eec7d45430c541e1506ed5381cd4e28bca5adaa8a85d09"
     },
     {
       "path": ".agents/skills/cinematic-film/references/toolchain.md",
       "bytes": 17172,
-      "sha256": "6401a683aa6952f3683ff950c3db3d904c6af7906d14f13f0c52f3a00b108c62"
+      "sha256": "8687f66e9b1bd7b86fca1e0038c11a0db48fd28df088964e793fcf31413df5be"
     },
     {
       "path": ".agents/skills/cinematic-film/references/type-library.md",
@@ -239,8 +239,8 @@
     },
     {
       "path": ".dockerignore",
-      "bytes": 96,
-      "sha256": "16b1891a8f5cbf8d62266ad18ee7ca05f497a0677e835c4bcead9636433553a8"
+      "bytes": 119,
+      "sha256": "0a69b3e53429964ab929ad24716161e27f207fcc88bc2fdceb8a50cc7d784cfc"
     },
     {
       "path": ".env.example",
@@ -259,8 +259,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 909,
-      "sha256": "c11edabe82f6912dc2267c497c30b62c8456f6732eca0a5b16b19bedb2b32c44"
+      "bytes": 1452,
+      "sha256": "f03c534ef336e74fd2f5c94323580fe6786f8939131aef74ff44d375308a8815"
     },
     {
       "path": ".gitignore",
@@ -269,13 +269,13 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 8773,
-      "sha256": "73c27dd097369f673575a084400c25c79b93214918d50564d698c7f6c9f527a7"
+      "bytes": 11151,
+      "sha256": "2d57cd252866a2709a47b51fec30a776cfdbfd2ab2a57059e5bdef9b30415a99"
     },
     {
       "path": "CHAT.md",
-      "bytes": 41343,
-      "sha256": "d5fa263da7f2d997386753d2d537afc968ac937c74bde08b1e0c7fe182faa1c9"
+      "bytes": 44340,
+      "sha256": "bb747ddc14973d9b11b5646ca09c31e46353d94e987dde662aa29c29f5c56209"
     },
     {
       "path": "CLAUDE.md",
@@ -294,18 +294,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 6739,
-      "sha256": "b44040f0b345ef0ea40b63325c18ea2381755b665c58ba796912f21d2ef3bdb1"
+      "bytes": 8000,
+      "sha256": "57002c3a70aa3b75b0aec0d5cccaecba6159d6d2ebc3bce0d92ed767341652a2"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "bytes": 2918,
-      "sha256": "c3bf78a720be913884fde32bd12870a9d67cf7f50c3e04e71efb7f38691023f1"
+      "bytes": 4882,
+      "sha256": "0b41e65e41b525bce3ad32b32fec0e81bc5b13f6760bb4b6ebdfc544e2cdf480"
     },
     {
       "path": "VERSION",
       "bytes": 6,
-      "sha256": "80447316529fc62014fbaa047fb67c51ac30e32830cda370405349d8d66d196c"
+      "sha256": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
     },
     {
       "path": "audio/dsp.mjs",
@@ -314,8 +314,13 @@
     },
     {
       "path": "audio/master.mjs",
-      "bytes": 6997,
-      "sha256": "53468308d81d8a0b935f5f3ce7f85bc2f86725441a79e9f4c396e4245f38058b"
+      "bytes": 7371,
+      "sha256": "8c3188f3394994acb7580666fd6e3657958d12295daa22b0e1564a18cc3e4041"
+    },
+    {
+      "path": "audio/voice.mjs",
+      "bytes": 2610,
+      "sha256": "5a2d297436f6b9bc9f3d8c805a30144e205783f8c74911538d0432d725ab56bd"
     },
     {
       "path": "connectors/README.md",
@@ -504,13 +509,13 @@
     },
     {
       "path": "docker/Dockerfile.dockerignore",
-      "bytes": 88,
-      "sha256": "13d2979152491eedbbaac2d7f4cee3c70448c39536fb80fa360d5b3b5dac5bb8"
+      "bytes": 118,
+      "sha256": "f5fd72c609444b5d8931042b4e8d34482ebe100b8e9d34ef816500eabd72b25a"
     },
     {
       "path": "docker/README.md",
-      "bytes": 1835,
-      "sha256": "70d9ae6d6757a7f7df2cc8b291e8df79e6818ff493d5e8e856c4d5bd7f02283b"
+      "bytes": 2223,
+      "sha256": "1e1d30e7e8fb8d802f75ab77d2518c5642343123ef82301781e802adb81373d1"
     },
     {
       "path": "docs/agents.md",
@@ -523,14 +528,19 @@
       "sha256": "556359a576c81d5d4bc385108c84044465ea3b8d0af2fed479b202f9e1aabef1"
     },
     {
+      "path": "docs/narration.md",
+      "bytes": 10925,
+      "sha256": "682d6c3640b5517ea40876015905231d58938cce450ae9fe62a84ddc8920e2cb"
+    },
+    {
       "path": "docs/testing.md",
-      "bytes": 3254,
-      "sha256": "b6cafdaf823a8a879cb61db4ea6fae5ab247ecc8d474acc47d62fcb485f5718d"
+      "bytes": 5823,
+      "sha256": "efdee52d4247d3b7812da8a5840e32412d8aeac46920cecdeaaa7a34977ea432"
     },
     {
       "path": "docs/troubleshooting.md",
-      "bytes": 2245,
-      "sha256": "10c779723b37dd8aa53b388a62b7f44ef4f3991a9891e575be5eb20e195c10f3"
+      "bytes": 3865,
+      "sha256": "8f91eebc754d0ccf8783954f8c1b1e691b210fa4c8e75698b63cd7e9dcdc06cb"
     },
     {
       "path": "examples/hark/hark.mp4",
@@ -573,14 +583,74 @@
       "sha256": "8f95559b6d09d53bf9443e5e097a7c57e507e8a43597f0c5a5797c7536ff113d"
     },
     {
+      "path": "examples/neap/neap.mp4",
+      "bytes": 6373838,
+      "sha256": "992aa68058a0491b0c209c67b2d4cd7f2413c379ede36ea417588861a00d3562"
+    },
+    {
+      "path": "examples/neap/neap.srt",
+      "bytes": 394,
+      "sha256": "1326402f661721fbee7314110357e597e4a98e230d412474a58a8f8fc9c3d333"
+    },
+    {
+      "path": "examples/neap/neap.vtt",
+      "bytes": 514,
+      "sha256": "9dd3897f8d355dd12c32ab9a31053b145f88e95a99ec2be3364de0c23b2800c3"
+    },
+    {
+      "path": "examples/neap/reviews.md",
+      "bytes": 2130,
+      "sha256": "547bf725df983b0b3bdaa3a3a98334baf06540a3683aac81b458dbc18797d327"
+    },
+    {
+      "path": "examples/neap/still-11_0s.jpg",
+      "bytes": 18238,
+      "sha256": "4c3b822b44207bea1b8a79fa78054bf1c18f56efb9b1aea54e011414b5bbfe44"
+    },
+    {
+      "path": "examples/neap/still-15_5s.jpg",
+      "bytes": 22244,
+      "sha256": "17ab483326472fc9eafedacfde7d1d52c858cc5c1bb1098fc5c88e5e3b9c04b1"
+    },
+    {
+      "path": "examples/neap/still-19_2s.jpg",
+      "bytes": 12376,
+      "sha256": "c3bdd387510130a835ca704f681d51cb0d30c91849748283a6a42d8df2d11e2b"
+    },
+    {
+      "path": "examples/neap/still-5_0s.jpg",
+      "bytes": 19188,
+      "sha256": "2ce785ea3ab05a04ae034f64df4ef56d572d9660ada7e21b71ab25dd1ba9a41f"
+    },
+    {
+      "path": "examples/neap/still-6_9s.jpg",
+      "bytes": 17866,
+      "sha256": "7c70a47c1115473dfa95b5f91070f814989b394e59658765d23d8e80eedc4c80"
+    },
+    {
+      "path": "narration/engine.mjs",
+      "bytes": 4358,
+      "sha256": "974852654d59a062a71000e8ffe578f421ad49292461d8b6c662b5933016e8f2"
+    },
+    {
+      "path": "narration/package-lock.json",
+      "bytes": 39115,
+      "sha256": "ce7d79882aebfabc5e87366e2f431e1e3ec4d9b8166572604c17df7d52ebe0a7"
+    },
+    {
+      "path": "narration/package.json",
+      "bytes": 453,
+      "sha256": "061cb684f9fd8f6e44e8b8651fc54867d1778caabc3e24e1d1a4306deab6d083"
+    },
+    {
       "path": "package-lock.json",
-      "bytes": 155921,
-      "sha256": "93151ba2ac47558221814b2b7d0374d334cb775f6f531a7ce4a6195fe55c848f"
+      "bytes": 155612,
+      "sha256": "1c2513282e99ca8b3e7e4da1b61e307c35eb6f0e170b483b1f6f2ebcf94cd19e"
     },
     {
       "path": "package.json",
-      "bytes": 1763,
-      "sha256": "fc7b71c083fab09993a5bcb9a6fcf252bfb7eeb05187e512fa0a8fe3e187cf5b"
+      "bytes": 1830,
+      "sha256": "50083f5cafe9f7c2ba641f458d72bb8be8a3a8105cd9fcd32f88e42bd757a489"
     },
     {
       "path": "public/films/hark/score.wav",
@@ -591,6 +661,31 @@
       "path": "public/films/hark/spectra.bin",
       "bytes": 2711808,
       "sha256": "0bf28a82a696c8470f37c1b0e9dc068fc147e05226719447ae812cc9f4e52753"
+    },
+    {
+      "path": "public/films/neap/narration/captions.srt",
+      "bytes": 394,
+      "sha256": "1326402f661721fbee7314110357e597e4a98e230d412474a58a8f8fc9c3d333"
+    },
+    {
+      "path": "public/films/neap/narration/captions.vtt",
+      "bytes": 514,
+      "sha256": "9dd3897f8d355dd12c32ab9a31053b145f88e95a99ec2be3364de0c23b2800c3"
+    },
+    {
+      "path": "public/films/neap/narration/meta.json",
+      "bytes": 4271,
+      "sha256": "cc01528f679dcc17c470d8a9e0803b464bd184ffa5b04a94950e137d48068c40"
+    },
+    {
+      "path": "public/films/neap/narration/narration.wav",
+      "bytes": 2596548,
+      "sha256": "05be3e6b833248cdf40f26032b55a0c2d2a9a9511abc032d93745179771c3908"
+    },
+    {
+      "path": "public/films/neap/score.wav",
+      "bytes": 6048044,
+      "sha256": "be2b6a06deabe737e09034e0275603cfd715033da6e47fc064a27b23b5cdc03e"
     },
     {
       "path": "public/films/template/score.wav",
@@ -648,6 +743,11 @@
       "sha256": "398b7c165edaa662b15358dabd397a41639de15d3d19a467be35d171885ca999"
     },
     {
+      "path": "src/engine/Captions.tsx",
+      "bytes": 2362,
+      "sha256": "434d3c465cc34134938a8ffae0eb4df8eda0525e0254a9412d17bc959170ad27"
+    },
+    {
       "path": "src/engine/Grain.tsx",
       "bytes": 1400,
       "sha256": "5bb22ef75c3de095d2924a8b5daa9c94182123f95d472d2d8eabbea6d33498ed"
@@ -686,6 +786,11 @@
       "path": "src/engine/lib/prng.ts",
       "bytes": 1023,
       "sha256": "2a85f495da7705a3706a6ed5aeb0751b5eb5c1d3dfe582913687783290f709a5"
+    },
+    {
+      "path": "src/engine/narration.ts",
+      "bytes": 1836,
+      "sha256": "e1d8a5435e2a40449d31f0cce5223d881b0dfb066d271f94cff93906a1feb783"
     },
     {
       "path": "src/engine/three/Post.tsx",
@@ -813,14 +918,74 @@
       "sha256": "e20c83b1a9e744ec6a1586737a2ad89814b0d2123ab95065e8ef33a709aca90f"
     },
     {
+      "path": "src/films/neap/Neap.tsx",
+      "bytes": 11654,
+      "sha256": "e293613eb9bcccdda7fac84a6c266912bea62c7eef100360959c5ce00d111bc7"
+    },
+    {
+      "path": "src/films/neap/README.md",
+      "bytes": 2138,
+      "sha256": "401492d9b73ce41217906f9966de0e5507fc53fc2a89c0b162a21aa44967eeca"
+    },
+    {
+      "path": "src/films/neap/beatmap.ts",
+      "bytes": 1603,
+      "sha256": "0d3aac1018b650f67d63d58ae1df33a34f77285167c3a5d11e02e325b0619235"
+    },
+    {
+      "path": "src/films/neap/brief.md",
+      "bytes": 886,
+      "sha256": "54fc491bc309c5c6094e6199db77e0e954dcc8ceb4092282388dcf9db71a66e5"
+    },
+    {
+      "path": "src/films/neap/data/narration.json",
+      "bytes": 5028,
+      "sha256": "ee484cdda541d49a00746263aaf82536b2e1b5ad869daa0d4c4e9e5b822ba753"
+    },
+    {
+      "path": "src/films/neap/expected.md",
+      "bytes": 583,
+      "sha256": "0f87894a6e08bc5b3f7b509eea8034659bfdc99807a322e9fc784b9d034742cc"
+    },
+    {
+      "path": "src/films/neap/film.ts",
+      "bytes": 317,
+      "sha256": "b6d6cef8eb23b6c7b7d7f5d08c938310214afa4d698a6e29cb47362174256487"
+    },
+    {
+      "path": "src/films/neap/moments.ts",
+      "bytes": 1134,
+      "sha256": "03be0a809b974b2bbee994dcfa13e8e5ff95034789526aa89efffcb2c0492427"
+    },
+    {
+      "path": "src/films/neap/narration.txt",
+      "bytes": 338,
+      "sha256": "d7c8ee540a39a4cf32ab97785a66c0afe5cbf594e6f8c54c9f989725630c570f"
+    },
+    {
+      "path": "src/films/neap/score.mjs",
+      "bytes": 7999,
+      "sha256": "e4a484ad6a33b7761fed0286cb1b64bf70996df988e4ea286ce2ff914e90237e"
+    },
+    {
+      "path": "src/films/neap/theme.ts",
+      "bytes": 1118,
+      "sha256": "1ecbdadc4f40125d460d4a8d57ef7545da62de19b44e8086b5854dda7e4eb5fa"
+    },
+    {
+      "path": "src/films/neap/treatment.md",
+      "bytes": 1612,
+      "sha256": "733ed9a29a27c96e43b8e4087fc511f60d5f75cdcf6ad448b271597b83018b0c"
+    },
+    {
       "path": "src/films/registry.ts",
-      "bytes": 219,
-      "sha256": "013c5d2db5a631a37fab1e224523f679a85f729d72b910ecfe1bfdbc0da7e9e3"
+      "bytes": 267,
+      "sha256": "7de6ed81ffa3caed4fa5ecc59f2fc35cb7692191a15eb689971849db6c4cfdb0"
     },
     {
       "path": "src/films/template/README.md",
-      "bytes": 989,
-      "sha256": "16437992b7025e788bfc15f364fb53715f35950684e11f09a94e7eeb95d4013d"
+      "bytes": 1040,
+      "sha256": "42de2e40c51a29944472b4d07bf864409e7cd08e8e8619b2a6d0481a3c4b6bd3"
     },
     {
       "path": "src/films/template/Template.tsx",
@@ -849,8 +1014,8 @@
     },
     {
       "path": "src/films/template/score.mjs",
-      "bytes": 7206,
-      "sha256": "29b5495c9593a78a87c73f1dcc471f4bfdbdcc51394dd708e06a15a5e54d99fe"
+      "bytes": 7557,
+      "sha256": "94677eb94e218b2d95e6eb2bbebf2c4d5ea1bb4414096e9456539307ad57c92d"
     },
     {
       "path": "src/films/template/theme.ts",
@@ -889,8 +1054,8 @@
     },
     {
       "path": "tools/doctor.mjs",
-      "bytes": 19823,
-      "sha256": "0bdad1b03a2dd4510d7e1139c94460ebcb4e5790930e137d2b1be9dd19fd8389"
+      "bytes": 21385,
+      "sha256": "e66a6e866d4f043bd795d0a050840585dff7732928a876aa45fc345d76810425"
     },
     {
       "path": "tools/film-audit-audio.mjs",
@@ -899,8 +1064,8 @@
     },
     {
       "path": "tools/film-audit.mjs",
-      "bytes": 36605,
-      "sha256": "ea886e77f27bba3cc821a27985fb485965048560978d521d2d4d7929b612859f"
+      "bytes": 37344,
+      "sha256": "b72e7e62170d21a6fbc95d082aea0c06828983ab9352871547a5ffbcc71e2d18"
     },
     {
       "path": "tools/fonts/CommissionerLabel-OFL.txt",
@@ -924,8 +1089,8 @@
     },
     {
       "path": "tools/lib/films.mjs",
-      "bytes": 3473,
-      "sha256": "d1cc528388e780f68df7a4bdcd6da59d97e61ab4585388b412a9f48d82ab13dd"
+      "bytes": 4624,
+      "sha256": "c57f155d31c59e1ca043b51a47ccaa0bb52a3ee1e06f9837290d7b9d43c8d32c"
     },
     {
       "path": "tools/lib/gl.mjs",
@@ -938,19 +1103,84 @@
       "sha256": "f68d729721b206a90356f7cd30883dc6068512e0baeaef0f18abdf7cf00307b8"
     },
     {
+      "path": "tools/lib/narration/align.mjs",
+      "bytes": 6229,
+      "sha256": "1a0692a45692c3904c0abf30f2df7b03c7ce24997c705349091e7c887181ca5b"
+    },
+    {
+      "path": "tools/lib/narration/anchors.mjs",
+      "bytes": 3287,
+      "sha256": "a74cb9f3d55bbed273f3518672ac718889ea32f95c55a46b4d97b9162f430017"
+    },
+    {
+      "path": "tools/lib/narration/captions.mjs",
+      "bytes": 4090,
+      "sha256": "947b95b2ab0ae692f58e5602f30b910e4d7ed5cf0f67067b393c39f259909ab8"
+    },
+    {
+      "path": "tools/lib/narration/check.mjs",
+      "bytes": 6640,
+      "sha256": "d4a1f3139c10703fd65968a0367130b6075650f92383028cc2462eb8739c5dd2"
+    },
+    {
+      "path": "tools/lib/narration/loudness.mjs",
+      "bytes": 4427,
+      "sha256": "ca875d58fe4f6d4afb3355ff1583ca3d585fc25b1fbbd688d686198c3f169460"
+    },
+    {
+      "path": "tools/lib/narration/meta.mjs",
+      "bytes": 1493,
+      "sha256": "247c11073b16bed895bce78351840cd67710544f20e9bc3e2588a50fa35c45c9"
+    },
+    {
+      "path": "tools/lib/narration/model.mjs",
+      "bytes": 4953,
+      "sha256": "ddce77b21ce6bfbc2a39ba359bc2f24158708fe5027ae0e66e84d431340daeba"
+    },
+    {
+      "path": "tools/lib/narration/pipeline.mjs",
+      "bytes": 9562,
+      "sha256": "83c66be76be1807a58d1ddda5187e2ea2e9141728b5e1b8ac44ba5ad7e7e0c48"
+    },
+    {
+      "path": "tools/lib/narration/script.mjs",
+      "bytes": 7280,
+      "sha256": "740f96fde84512bbab4de5d87e21cc0cd1f7002d564dc6a2d47de48e3467a524"
+    },
+    {
+      "path": "tools/lib/narration/spans.mjs",
+      "bytes": 511,
+      "sha256": "db62ef011b129e14e1109c1535001c27dcf0aa7d3e44cc09ef7172b463420962"
+    },
+    {
+      "path": "tools/lib/narration/timeline.mjs",
+      "bytes": 1929,
+      "sha256": "2dbfd54e46b7321009c131e5e99b5a1eee56ea4ae23eb3f5377fa8c6a677b74b"
+    },
+    {
+      "path": "tools/lib/narration/wav.mjs",
+      "bytes": 723,
+      "sha256": "07a41f448714d8d50a3f89232b14f52103626bc4dcd8bb61fa097943c62dca1f"
+    },
+    {
       "path": "tools/lib/release.mjs",
-      "bytes": 7490,
-      "sha256": "190243dd4688bcd33bc0ffc10a66ac666d226e13f35afa7c1076e4cb9693e13e"
+      "bytes": 7503,
+      "sha256": "accde714d970173058c21bd8e58a1d07e81010bf8f58f0df7283398a9156b296"
     },
     {
       "path": "tools/lib/remotion.mjs",
-      "bytes": 4733,
-      "sha256": "5bbf150ad82003bc14758b981fe6df4bc01bb5cf2b68eea7ac341e08c8dfb695"
+      "bytes": 5393,
+      "sha256": "ea550b8cde9750e3a1924065170ae9884875d57513357e1dab4860823a7969dc"
     },
     {
       "path": "tools/master.mjs",
-      "bytes": 919,
-      "sha256": "3bebac8af14ac36931575066163cc8da34c19f9f7f54088c0f9ccee409210201"
+      "bytes": 2101,
+      "sha256": "a9d90942df5060e26a4c9b5013b704cde4e83489e20916ff46c3bb636a799650"
+    },
+    {
+      "path": "tools/narrate.mjs",
+      "bytes": 8048,
+      "sha256": "dff1ffe2a38d766bb77627b430aa62bcdaf38bc9ef024d7baa8a95140a9b2bdb"
     },
     {
       "path": "tools/new-film.mjs",
@@ -969,13 +1199,13 @@
     },
     {
       "path": "tools/release.mjs",
-      "bytes": 7870,
-      "sha256": "9c58bbde2a462ab2538a2aecde371ceffb1eac1ea80deb9563115f54d8f1e39e"
+      "bytes": 8351,
+      "sha256": "fcc489bcd2ca3219f415f0ed9657ebea6bf5d741825e639c003e31d5a5fa85a2"
     },
     {
       "path": "tools/render.mjs",
-      "bytes": 5905,
-      "sha256": "5ffdef4f680690821fb64210a9e7fa0c560ad94d616b491700d0ec7c3b5e81d9"
+      "bytes": 5231,
+      "sha256": "1770bb6487e1813a5a41ca072af59121276690f07b8095e03c28b5a00158589f"
     },
     {
       "path": "tools/run-tests.mjs",
@@ -999,8 +1229,8 @@
     },
     {
       "path": "tools/slop-lint.mjs",
-      "bytes": 17859,
-      "sha256": "01c619b87bfbe1ce551d26e6eb957d6116b96d575a7008ef12029997e264da41"
+      "bytes": 17987,
+      "sha256": "b007d3e68d74f7e1813789b56568dbe41d88aee032db399392dcde9e3c91c69b"
     },
     {
       "path": "tools/stills.mjs",
@@ -1014,8 +1244,8 @@
     },
     {
       "path": "tools/test/doctor.test.mjs",
-      "bytes": 6463,
-      "sha256": "e058f872cde4a0e7bf6a45adcaf92f49c7bb08903974590bf8f317ea71aba4fa"
+      "bytes": 7746,
+      "sha256": "cf9d6a13087635459d1d42f96270e564bcf6e16887986bfcb63f7840d5b5e326"
     },
     {
       "path": "tools/test/dsp.test.mjs",
@@ -1024,8 +1254,8 @@
     },
     {
       "path": "tools/test/film-audit.test.mjs",
-      "bytes": 8107,
-      "sha256": "4b60d7f918a2fc9a7b38098c83be0530ac2ca852618d925ff6b1d1e71a424d9d"
+      "bytes": 10391,
+      "sha256": "64eb3444d574eca781945a31242057c43731b28629f6a127583f8d3e36a9f589"
     },
     {
       "path": "tools/test/fixtures/clean/src/Good.tsx",
@@ -1058,6 +1288,11 @@
       "sha256": "e50c2952a78d631da4fc9c43cb7a1d1269fd86c934f44ff8be1dcb95d6511040"
     },
     {
+      "path": "tools/test/fixtures/narration/fake-engine.mjs",
+      "bytes": 2087,
+      "sha256": "ef0d6c5ccd996e73a9b6890d2ede00da5074c4922cdc362123ef4aea457a36bd"
+    },
+    {
       "path": "tools/test/fixtures/slop/src/Bad.tsx",
       "bytes": 656,
       "sha256": "f0fa50bc260534fe9cf553e9f7822b5d21597e15e2b639bc8c2fdad4d9b02ab2"
@@ -1074,8 +1309,68 @@
     },
     {
       "path": "tools/test/master.test.mjs",
-      "bytes": 1933,
-      "sha256": "86d114835929536a919df68105def24042c4e22b599c6419ac059bbcea268dc3"
+      "bytes": 4395,
+      "sha256": "2efa51ddc2549077460d011fd58f483043820f6be4c1965db13645901bca8b25"
+    },
+    {
+      "path": "tools/test/narrate.test.mjs",
+      "bytes": 4615,
+      "sha256": "093214c1d2c761e2fa3bc0b16055bc666ca458fea3df7bd96257ac9e833deaa5"
+    },
+    {
+      "path": "tools/test/narration-align.test.mjs",
+      "bytes": 4861,
+      "sha256": "8e858bbf8081e4552a93d7d8b09ea862a7a8ade105afcd8df6c1520ea02269a5"
+    },
+    {
+      "path": "tools/test/narration-anchors.test.mjs",
+      "bytes": 2095,
+      "sha256": "41117f578f7c39f8f0c71fbb86e9b74d7c97c55c44d5fb5cbb8129db653f9d67"
+    },
+    {
+      "path": "tools/test/narration-captions.test.mjs",
+      "bytes": 3714,
+      "sha256": "4345c002d544f312f4eaa18dcd6e8032f704cf7cc905e531634a08e86bad5fc7"
+    },
+    {
+      "path": "tools/test/narration-engine.test.mjs",
+      "bytes": 1780,
+      "sha256": "29c0778ec4756958e1dbf5ad7a4901cfea2b97b5bf3403e49ffe2895a129413f"
+    },
+    {
+      "path": "tools/test/narration-loudness.test.mjs",
+      "bytes": 5008,
+      "sha256": "5b299d6eae5d5ce73952b2cbe3ad98654bd52d6773b5df8620eb03bf414c0c98"
+    },
+    {
+      "path": "tools/test/narration-meta.test.mjs",
+      "bytes": 1495,
+      "sha256": "ca9ae5b8e774425966404e3d31c8a5e63f97d646c515e037e072a60119e0daa9"
+    },
+    {
+      "path": "tools/test/narration-model.test.mjs",
+      "bytes": 3103,
+      "sha256": "556813c18040e745fec53259d70434e676b5261b16786ae012c6c4cf6a4ba06b"
+    },
+    {
+      "path": "tools/test/narration-pipeline.test.mjs",
+      "bytes": 4855,
+      "sha256": "4489fccf4a85d158664c94792122c15720ca2e166bd64bdc577d2ee89e46bc2a"
+    },
+    {
+      "path": "tools/test/narration-release.test.mjs",
+      "bytes": 6348,
+      "sha256": "2b953752ec2b0cc68fbe22832b4edb5e7e4ca240664642cc6bbd2ea3d458e608"
+    },
+    {
+      "path": "tools/test/narration-script.test.mjs",
+      "bytes": 6372,
+      "sha256": "81b3b001f6558404fe981db51407a7941850b03a22becf3d93ee042c5dce0487"
+    },
+    {
+      "path": "tools/test/narration-timeline.test.mjs",
+      "bytes": 2337,
+      "sha256": "1a3cd5fc3f36bf83ea77711337ffa262c678e53c493d0c5df9932526417184af"
     },
     {
       "path": "tools/test/new-film.test.mjs",
@@ -1084,13 +1379,13 @@
     },
     {
       "path": "tools/test/release.test.mjs",
-      "bytes": 6331,
-      "sha256": "e9a5aac26adb5d5209f968b326f5c76d1be5d91e31064c18ee693003091c6ed8"
+      "bytes": 6496,
+      "sha256": "f212df5da1eacdd317dcf0f61c56a25cc23df9863c13c05d1eae196aca01ef49"
     },
     {
       "path": "tools/test/render.test.mjs",
-      "bytes": 1946,
-      "sha256": "93011bb94c2a93c96137a6e7719fb80fc463c5625f79a7903f87046f24543481"
+      "bytes": 3043,
+      "sha256": "9ae4b8531b795e974efd29e7f285bc769bd35f6e2dedba31f77ab5cec47f9aa4"
     },
     {
       "path": "tools/test/sheet-packet.test.mjs",
@@ -1104,8 +1399,13 @@
     },
     {
       "path": "tools/test/slop-lint.test.mjs",
-      "bytes": 5975,
-      "sha256": "c3272348ee822c9b902417502d010dbbe5bbbf0dbdfca31cfcd1be3012610660"
+      "bytes": 6680,
+      "sha256": "d7ba008a037ba7def606fccfd6c1e3eb73d35eddede9d77f485f01b0c41c516a"
+    },
+    {
+      "path": "tools/test/voice.test.mjs",
+      "bytes": 2797,
+      "sha256": "46f93e630cd9a12f4285ab29078b1709c0eacb7e356ebf375c287488de05deaf"
     },
     {
       "path": "tsconfig.json",
