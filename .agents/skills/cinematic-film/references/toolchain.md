@@ -9,7 +9,7 @@ public sources are in [sources.md](../sources.md), under "Engines, finishing and
 
 | Engine | Status | Verdict |
 |---|---|---|
-| **Remotion 4.0.532** (React, headless Chrome + ffmpeg) | releasing daily; 5.0 documented, not published | **primary**. Free licence covers organisations of up to 3 people (under 5.0 terms contractors count; check your own case on remotion.dev). Agent skills (`npx remotion skills add`), Claude Code plugin; the Remotion MCP is deprecated |
+| **Remotion 4.0.539** (React, headless Chrome + ffmpeg) | releasing daily; 5.0 documented, not published | **primary**. Free licence covers organisations of up to 3 people (under 5.0 terms contractors count; check your own case on remotion.dev). Agent skills (`npx remotion skills add`), Claude Code plugin; the Remotion MCP is deprecated |
 | **HyperFrames** (HeyGen, plain HTML + GSAP, Apache-2.0) | open-sourced April 2026, v0.8.104 on 1 Oct, about 55k stars, Claude Code plugin with 21 skills | credible second engine for plain-HTML scenes; 0.x, expect churn; check its colour tags with ffprobe before trusting it |
 | Revideo | alive, small, moved to `midrender/revideo` | niche, no advantage here |
 | Motion Canvas | no stable release since December 2024 | do not start new work on it |

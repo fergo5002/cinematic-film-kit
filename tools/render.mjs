@@ -9,25 +9,15 @@
 //        --concurrency <n>, --frames <from>-<to> (a range, for checking one passage; it goes to
 //        out/<id>/raw-frames-<from>-<to>.mp4 or preview-frames-<from>-<to>.mp4, never over the
 //        film's own render, so a fragment can never be mastered or audited as the film).
-import {existsSync, mkdirSync, statSync, writeFileSync} from 'node:fs';
+import {mkdirSync, statSync, writeFileSync} from 'node:fs';
 import path from 'node:path';
-import {UsageError, filmDir, filmPublicDir, fmtBytes, main, outputs, parseArgs, rel, requireFilm} from './lib/kit.mjs';
+import {scoreStatus} from './lib/films.mjs';
+import {ROOT, UsageError, fmtBytes, main, outputs, parseArgs, rel, requireFilm} from './lib/kit.mjs';
 import {bundleEntry, chromiumOptionsFor, filmPublic, glFor, loadRemotion, openKitBrowser, selectFilm, shortError, writeFilmEntry} from './lib/remotion.mjs';
 
 const RENDER_SETTINGS = {
 	full: {codec: 'h264', crf: 12, x264Preset: 'slow', colorSpace: 'bt709', imageFormat: 'png', pixelFormat: 'yuv420p', audioCodec: 'aac', audioBitrate: '320k', scale: 1},
 	preview: {codec: 'h264', crf: 28, x264Preset: 'ultrafast', colorSpace: 'bt709', imageFormat: 'jpeg', jpegQuality: 80, pixelFormat: 'yuv420p', audioCodec: 'aac', audioBitrate: '192k', scale: 0.5},
-};
-
-// A film that has a score.mjs needs its score.wav before it renders, and a stale one lies.
-const checkScore = (id) => {
-	const script = path.join(filmDir(id), 'score.mjs');
-	if (!existsSync(script)) return null;
-	const wav = path.join(filmPublicDir(id), 'score.wav');
-	if (!existsSync(wav)) return {fatal: `public/films/${id}/score.wav is missing. Run: npm run score -- ${id}`};
-	const newest = Math.max(...['score.mjs', 'beatmap.ts'].map((f) => path.join(filmDir(id), f)).filter(existsSync).map((f) => statSync(f).mtimeMs));
-	if (statSync(wav).mtimeMs < newest) return {warn: `public/films/${id}/score.wav is older than score.mjs or beatmap.ts. Run: npm run score -- ${id}`};
-	return null;
 };
 
 const parseFrames = (s) => {
@@ -50,7 +40,7 @@ main(async () => {
 			: out.raw;
 	mkdirSync(out.dir, {recursive: true});
 
-	const score = checkScore(id);
+	const score = scoreStatus(ROOT, id);
 	if (score?.fatal) throw new UsageError(score.fatal);
 	if (score?.warn) console.warn(`warning: ${score.warn}`);
 

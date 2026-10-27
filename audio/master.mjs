@@ -20,7 +20,8 @@
 // ceiling. Default target -16 LUFS integrated, -1.5 dBTP: Apple's launch films sit at -15 to
 // -16.3, below YouTube's -14 reference, so nothing is turned down and transients keep their punch.
 //
-// Usage: node audio/master.mjs in.mp4 out.mp4 [targetLUFS=-16] [ceilingDBTP=-1.5]
+// Usage: node audio/master.mjs in.mp4 out.mp4 [targetLUFS=-16] [ceilingDBTP=-1.5] [--comment <text>]
+//        --comment writes the text into the file's comment tag (a narrated film's AI-voice disclosure).
 //        (npm run master -- <id> runs it on out/<id>/raw.mp4 and writes out/<id>/<id>.mp4)
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
@@ -40,7 +41,7 @@ const ff = (args) => {
 	return `${r.stdout}\n${r.stderr}`;
 };
 
-export const master = (input, output, targetArg = '-16', ceilingArg = '-1.5') => {
+export const master = (input, output, targetArg = '-16', ceilingArg = '-1.5', {comment = ''} = {}) => {
 	const I = Number(targetArg);
 	const TP = Number(ceilingArg);
 	const measure = (stage = '') => {
@@ -86,7 +87,8 @@ export const master = (input, output, targetArg = '-16', ceilingArg = '-1.5') =>
 			: vcodec === 'hevc'
 				? ['-bsf:v', 'hevc_metadata=colour_primaries=1:transfer_characteristics=1:matrix_coefficients=1:video_full_range_flag=0']
 				: [];
-	const encode = () => ff(['-y', '-i', input, '-c:v', 'copy', ...bsf, '-af', `${stage}aresample=48000`, '-c:a', 'aac', '-b:a', '256k', '-ar', '48000', '-movflags', '+faststart', output]);
+	const tag = comment ? ['-metadata', `comment=${comment}`] : [];
+	const encode = () => ff(['-y', '-i', input, '-c:v', 'copy', ...bsf, '-af', `${stage}aresample=48000`, '-c:a', 'aac', '-b:a', '256k', '-ar', '48000', ...tag, '-movflags', '+faststart', output]);
 	encode();
 
 	// 4. verify the delivered file with the same meter the audit uses. The AAC encode can move the
@@ -113,13 +115,16 @@ export const master = (input, output, targetArg = '-16', ceilingArg = '-1.5') =>
 // Run only as a command: importing this file (the tests do) must not master anything.
 const invoked = process.argv[1] && path.relative(path.resolve(process.argv[1]), fileURLToPath(import.meta.url)) === '';
 if (invoked) {
-	const [, , input, output, targetArg, ceilingArg] = process.argv;
+	const args = process.argv.slice(2);
+	const c = args.indexOf('--comment');
+	const comment = c === -1 ? '' : (args.splice(c, 2)[1] ?? '');
+	const [input, output, targetArg, ceilingArg] = args;
 	if (!input || !output) {
-		console.error('usage: node audio/master.mjs in.mp4 out.mp4 [targetLUFS] [ceilingDBTP]');
+		console.error('usage: node audio/master.mjs in.mp4 out.mp4 [targetLUFS] [ceilingDBTP] [--comment <text>]');
 		process.exitCode = 1;
 	} else {
 		try {
-			master(input, output, targetArg, ceilingArg);
+			master(input, output, targetArg, ceilingArg, {comment});
 		} catch (err) {
 			console.error(err.message);
 			process.exitCode = 1;

@@ -7,7 +7,8 @@ import {test} from 'node:test';
 import {fileURLToPath} from 'node:url';
 import {REQUIRED, checkCapabilities, parseBsfList, parseDeviceList, parseEbur128Summary, parseEncoderList, parseFilterList} from '../lib/ffmpeg.mjs';
 import {chooseGl, classifyRenderer, defaultGl, glCandidates, resolveGl} from '../lib/gl.mjs';
-import {node, tempDir, tempKit} from './helpers.mjs';
+import {browserMatches, pinnedRemotion} from '../lib/remotion.mjs';
+import {KIT, node, tempDir, tempKit} from './helpers.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const canned = (f) => readFileSync(path.join(here, 'fixtures', 'ffmpeg', f), 'utf8');
@@ -114,4 +115,21 @@ test('before npm ci the doctor checks the machine, says what to run, and install
 	// other fixes (git, for example) may be listed first; npm ci must be among them
 	assert.match(r.stdout, /To fix, run:[\s\S]*?\n\s+npm ci\b/);
 	assert.ok(!existsSync(path.join(kit, 'node_modules')), 'the doctor installed something without --fix');
+	// narration is optional: not installed is reported, never a failure
+	assert.match(r.stdout, /narration\s+off\s+optional, not installed/);
+});
+
+test('the Remotion version the doctor expects is the one package.json pins', () => {
+	const pkg = JSON.parse(readFileSync(path.join(KIT, 'package.json'), 'utf8'));
+	assert.equal(pinnedRemotion(KIT), pkg.dependencies.remotion);
+	for (const [name, v] of Object.entries(pkg.dependencies)) if (name === 'remotion' || name.startsWith('@remotion/')) assert.equal(v, pkg.dependencies.remotion, `${name} is pinned apart from remotion`);
+});
+
+test('Chrome Headless Shell matches when it is the tested build, including Remotion\'s patched builds', () => {
+	// Remotion 4.0.539 marks its own patched downloads (macOS arm64, most Linux) "<version>-remotion-v3".
+	assert.equal(browserMatches('157.0.8080.0', '157.0.8080.0'), true);
+	assert.equal(browserMatches('157.0.8080.0-remotion-v3', '157.0.8080.0'), true);
+	assert.equal(browserMatches('156.0.7000.0-remotion-v3', '157.0.8080.0'), false);
+	assert.equal(browserMatches('157.0.8080.01', '157.0.8080.0'), false);
+	assert.equal(browserMatches('157.0.8080.0', null), true, 'no expected version to compare: skip, never guess');
 });

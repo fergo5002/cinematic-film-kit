@@ -150,8 +150,11 @@ the WAV and ≤ -1.0 on the encoded file; social-first -14; broadcast EBU R128 s
    each stem, then read the image. Any narrow steady line or beating band you did not design is a bug.
 
 **Mix levels**: with voiceover, duck music 6 to 12 dB under speech (`sidechaincompress`, attack 30 to 80
-ms, release 250 to 700 ms). With no voiceover, let diegetic sound and score trade places; never run them
-at equal level.
+ms, release 250 to 700 ms). The kit's own narration does it from the word timings instead
+(`audio/voice.mjs`: 10 dB, down 80 ms before a phrase, back up over 0.6 s after it), which is exact
+and the same every run, and the release gate fails a voice that leads the bed by less than 10 dB
+under speech. With no voiceover, let diegetic sound and score trade places; never run them at equal
+level.
 
 ## 8. Tools
 

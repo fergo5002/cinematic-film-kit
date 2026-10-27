@@ -19,10 +19,11 @@ import path from 'node:path';
 import {REQUIRED, checkCapabilities, ff, firstLineVersion, parseBsfList, parseDeviceList, parseEbur128Summary, parseEncoderList, parseFilterList} from './lib/ffmpeg.mjs';
 import {LOCAL_FILE, VALID_GL, chooseGl, classifyRenderer, glCandidates, isDocker, readLocal} from './lib/gl.mjs';
 import {ROOT, capture, fmtBytes, main, parseArgs} from './lib/kit.mjs';
-import {publicFor} from './lib/remotion.mjs';
+import {snapshotDir, verifySnapshot} from './lib/narration/model.mjs';
+import {browserMatches, pinnedRemotion, publicFor} from './lib/remotion.mjs';
 
 const MIN_NODE = [22, 18];
-const REMOTION_VERSION = '4.0.532';
+const REMOTION_VERSION = pinnedRemotion();
 const PROBE_LEFT = [204, 51, 102]; // keep in step with src/tests/GlProbe.tsx
 const PROBE_RIGHT = [51, 102, 204];
 
@@ -33,7 +34,10 @@ const os_ = platform === 'win32' ? 'windows' : platform === 'darwin' ? 'macos' :
 const INSTALL = {
 	node: {windows: 'winget install OpenJS.NodeJS.LTS', macos: 'brew install node@22', linux: 'curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs'},
 	git: {windows: 'winget install Git.Git', macos: 'xcode-select --install', linux: 'sudo apt-get install -y git'},
-	ffmpeg: {windows: 'winget install Gyan.FFmpeg', macos: 'brew install ffmpeg', linux: 'sudo apt-get install -y ffmpeg'},
+	ffmpeg: {windows: 'winget install Gyan.FFmpeg', macos: 'brew install ffmpeg-full', linux: 'sudo apt-get install -y ffmpeg'},
+	// Homebrew's plain ffmpeg has no drawtext (observed on 9.0.2, October 2026); ffmpeg-full has it but
+	// is keg-only, so it also has to go on the PATH.
+	ffmpegPath: {windows: null, macos: 'export PATH="$(brew --prefix ffmpeg-full)/bin:$PATH"   (and add that line to ~/.zprofile, then open a new terminal)', linux: null},
 	chromeLibs: {
 		windows: null,
 		macos: null,
@@ -104,6 +108,7 @@ const checkFfmpeg = () => {
 	const [maj, min] = (ver?.match(/^(\d+)\.(\d+)/) ?? []).slice(1).map(Number);
 	const recent = maj > 5 || (maj === 5 && min >= 1);
 	row('ffmpeg', !ffv ? 'FAIL' : recent ? 'ok' : Number.isFinite(maj) ? 'FAIL' : 'warn', !ffv ? 'not found on PATH' : `${ver}${recent ? '' : Number.isFinite(maj) ? ' (needs 5.1 or later)' : ' (could not read the version; needs 5.1 or later)'}`, ffv && (recent || !Number.isFinite(maj)) ? null : INSTALL.ffmpeg[os_]);
+	if (!(ffv && (recent || !Number.isFinite(maj))) && INSTALL.ffmpegPath[os_]) fixes.push(INSTALL.ffmpegPath[os_]);
 	row('ffprobe', fpv ? 'ok' : 'FAIL', fpv ? firstLineVersion(fpv) : 'not found on PATH', fpv ? null : INSTALL.ffmpeg[os_]);
 	if (!ffv) {
 		for (const c of ['ffmpeg filters', 'ffmpeg encoders', 'loudness meter']) row(c, 'NOT RUN', 'needs ffmpeg');
@@ -118,6 +123,7 @@ const checkFfmpeg = () => {
 	const needed = REQUIRED.filters.length + REQUIRED.bsfs.length;
 	const missing = [...miss.missingFilters, ...miss.missingBsfs];
 	row('ffmpeg filters', missing.length ? 'FAIL' : 'ok', missing.length ? `missing: ${missing.join(', ')}` : `all ${needed} present (${[...REQUIRED.filters, ...REQUIRED.bsfs].join(', ')})`, missing.length ? `${INSTALL.ffmpeg[os_]}   (a full build: drawtext needs libfreetype)` : null);
+	if (missing.length && INSTALL.ffmpegPath[os_] && !fixes.includes(INSTALL.ffmpegPath[os_])) fixes.push(INSTALL.ffmpegPath[os_]);
 	if (miss.missingEncoders.length) row('ffmpeg encoders', 'FAIL', `missing: ${miss.missingEncoders.join(', ')}`, INSTALL.ffmpeg[os_]);
 	else if (miss.missingOptional.length) row('ffmpeg encoders', 'warn', `aac present; no libx264 (tests fall back to mpeg4; Remotion renders with its own encoder)`);
 	else row('ffmpeg encoders', 'ok', 'aac, libx264');
@@ -182,7 +188,7 @@ const browserStatus = () => {
 		// an internal file moved: skip the version comparison rather than guess
 	}
 	const exe = readdirSync(dir, {recursive: true}).some((f) => /chrome-headless-shell(\.exe)?$/.test(String(f)));
-	return {present: exe, version, expected, matches: !expected || expected === version};
+	return {present: exe, version, expected, matches: browserMatches(version, expected)};
 };
 
 const checkBrowser = async (fix) => {
@@ -306,6 +312,25 @@ const proof = async ({serveUrl, renderer, dir}, gl) => {
 	}
 };
 
+// Narration is optional: not installed is "off", never a failure. When it is installed, check the
+// model's files by size only (the full hash runs before every narration).
+const checkNarration = async () => {
+	const installed = (() => {
+		try {
+			return JSON.parse(readFileSync(path.join(ROOT, 'narration', 'node_modules', 'kokoro-js', 'package.json'), 'utf8')).version;
+		} catch {
+			return null;
+		}
+	})();
+	if (!installed) {
+		row('narration', 'off', 'optional, not installed (npm run narrate -- --setup adds a local voice: about 750 MB)');
+		return;
+	}
+	const r = await verifySnapshot(snapshotDir(), undefined, {hash: false});
+	if (r.ok) row('narration', 'ok', `kokoro-js ${installed}, Kokoro-82M model present`);
+	else row('narration', 'warn', `packages installed, but the model is not ready: ${r.problems[0]}`, 'npm run narrate -- --setup');
+};
+
 const printTable = () => {
 	const w = Math.max(...rows.map((r) => r.check.length)) + 2;
 	console.log('');
@@ -373,6 +398,8 @@ main(async () => {
 			}
 		}
 	}
+
+	await checkNarration();
 
 	const previous = readLocal(ROOT);
 	if (!choice && previous?.gl) console.log(`\n${LOCAL_FILE} still says --gl=${previous.gl} from ${previous.checked ?? 'an earlier run'}.`);

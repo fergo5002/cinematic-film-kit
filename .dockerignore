@@ -8,3 +8,4 @@ dist
 film.local.json
 .env
 .env.*
+narration/node_modules

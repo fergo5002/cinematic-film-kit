@@ -1,0 +1,11 @@
+# Neap: the narration. One phrase per line; [pause n] sets an exact silence.
+The sea keeps its own time.
+[pause 0.7]
+Twice a day, between the tides, the water stops.
+[pause 1.4]
+Neap tells you when, to the minute,
+for every harbour on your coast.
+[pause 0.7]
+Slack water today: {14:52|two fifty-two}.
+[pause 0.9]
+Go when the water rests.

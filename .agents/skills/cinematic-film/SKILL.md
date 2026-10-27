@@ -315,6 +315,13 @@ films, -14 social-first, -1.5 dBTP; verify integrated, LRA (below 6 LU means no 
 peak on the delivered file. Check sync on stems, not the mix: a short window on a low room tone
 jitters by 8 dB and fakes early onsets. `sound-design.md`, `dsp-cookbook.md`.
 
+**A voice.** When a film is narrated (`npm run narrate`, `docs/narration.md`), the voice leads: time
+the picture from its words, duck the bed about 10 dB under every phrase (`duckUnderSpeech` in
+`audio/voice.mjs`), put hits in the pauses, and let the music take the room only after the last
+word. The voice stem is mastered to -19 LUFS mono so it plays at -16 in the stereo film. Speech-led
+films have less range: the narrated loudness-range floor is 2.5 LU (eleven speech-led product films
+in the corpus measure 2.6 to 8.2). Never speed a voice up, and never let it repeat the screen.
+
 ---
 
 ## 7. Product truth
@@ -341,7 +348,7 @@ jitters by 8 dB and fakes early onsets. `sound-design.md`, `dsp-cookbook.md`.
 
 Start every film with `npm run new-film -- <id>`, which copies the neutral starter in
 `src/films/template/` and registers the composition. Check `package.json` for the pinned versions
-(at the time of writing: Remotion 4.0.532, Three 0.186, React 19). The rules that keep it
+(at the time of writing: Remotion 4.0.539, Three 0.186, React 19). The rules that keep it
 reproducible:
 
 - **One beatmap** (`src/films/<id>/beatmap.ts`) owns every frame number. Scenes and the score import
@@ -404,7 +411,7 @@ Numeric bands for the measured layer (calibrated on nine canon films plus held-o
 longest settled run 0.25 to 5.25s; settled fraction 0.04 to 0.88; overall motion energy 0.30 to
 3.00 (60fps-equivalent); concentration 0.42 to 0.90 on moving frames; mean luma 24 to 85 dark,
 70 to 125 standard, 125 to 195 light, 195 to 245 light-mode UI; audio -16 to -13 LUFS, LRA 6 to 13
-LU, true peak -3 to -1 dBTP. Detector cut counts are diagnostic only; gate the authored shot
+LU (2.5 to 13 for a narrated film), true peak -3 to -1 dBTP. Detector cut counts are diagnostic only; gate the authored shot
 manifest. Never gate luma spread on a film under about three shots.
 
 If it is not beautiful, it is not done. Go to easing and sound first: that is where most "cheap"

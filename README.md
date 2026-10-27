@@ -1,14 +1,19 @@
 # Cinematic Film Kit
 
-Short films, made with code. Remotion and WebGL for the picture, a synthesised score for the sound,
-and a set of tools to render and check the result with your coding agent.
+Short films, made with code and your coding agent. Remotion and WebGL draw the picture, a score is
+synthesised from the same timing, an optional local voice can narrate it, and a set of tools
+renders, masters and checks the result.
 
 [Watch Hark](examples/hark/hark.mp4), a 22 second demo for a fictional birdwatching app.
 
 [![A still from Hark](examples/hark/poster.png)](examples/hark/hark.mp4)
 
-The default workflow draws and synthesises everything locally. Paid generation is optional.
-The kit's own code is MIT licensed; [Remotion has separate terms](https://www.remotion.dev/license).
+[Watch Neap](examples/neap/neap.mp4), a 21 second narrated demo for a fictional tide app, with an
+AI-generated voice made on the laptop that rendered it.
+
+The default workflow draws and synthesises everything locally. Narration is optional and also
+local; paid generation is optional too. The kit's own code is MIT licensed;
+[Remotion has separate terms](https://www.remotion.dev/license).
 
 ## What you need
 
@@ -24,7 +29,9 @@ The kit's own code is MIT licensed; [Remotion has separate terms](https://www.re
 1. Install Node.js and ffmpeg:
    - **Windows** (PowerShell): `winget install OpenJS.NodeJS.LTS` and `winget install Gyan.FFmpeg`,
      then open a new terminal.
-   - **macOS** ([Homebrew](https://brew.sh)): `brew install node ffmpeg`.
+   - **macOS** ([Homebrew](https://brew.sh)): `brew install node ffmpeg-full`, then
+     `export PATH="$(brew --prefix ffmpeg-full)/bin:$PATH"` and add that line to `~/.zprofile`.
+     Homebrew's plain `ffmpeg` lacks `drawtext`, which the contact sheets need.
    - **Linux** (Debian or Ubuntu): `sudo apt install ffmpeg`, and Node 22 or newer from
      [nodejs.org](https://nodejs.org) or your package manager.
    - **Or Docker**, which needs nothing else: see `docker/README.md`.
@@ -78,9 +85,15 @@ As of October 2026:
 Agents change fast. If yours does not seem to have read the instructions, say "Read AGENTS.md and
 follow it" at the start of the session.
 
-## Free, or with connectors
+## Free, narrated, or with connectors
 
 **Free** is the default and needs nothing more. Everything is drawn and synthesised in code.
+
+**Narration** gives a film a voice, made on your machine with Kokoro-82M, an open text-to-speech
+model: no account and no key. The kit times every word, so the picture can key on them, writes
+captions, ducks the score under the voice and marks the result as an AI-generated voice. Set it up
+only if you want it (`npm run narrate -- --setup`, about 750 MB, all inside the kit's folder):
+`docs/narration.md`. A film without a script works exactly as before.
 
 **Connectors** add paid generation (images, video, sound effects, music, speech) from fal,
 Replicate, ElevenLabs, OpenAI and Google, behind one command with a hard spending cap and a record
@@ -93,13 +106,14 @@ held to the same checks as drawn work.
 |---|---|
 | `AGENTS.md` | the operating manual every agent follows |
 | `.agents/skills/cinematic-film/` | the craft: motion, structure, sound, type, colour, the checks, and the research behind them |
-| `src/films/` | one folder per film; `hark` is the example, `template` is where new films start |
+| `src/films/` | one folder per film; `hark` and `neap` (narrated) are the examples, `template` is where new films start |
 | `src/engine/`, `audio/` | shared drawing, shader and sound code |
-| `tools/` | doctor, rendering, stills, contact sheets, the audit, the slop lint, review packets, release |
+| `tools/` | doctor, rendering, stills, contact sheets, narration, the audit, the slop lint, review packets, release |
+| `narration/` | the optional local voice's packages and engine (installed on request) |
 | `reviews/prompts/` | the cold explain-back and the critic |
 | `connectors/` | optional paid generation, with mocks and tests |
 | `docker/` | a Linux render box |
-| `examples/hark/` | the example film and its review records |
+| `examples/hark/`, `examples/neap/` | the example films and their review records |
 | `docs/` | longer guides: per-agent notes, troubleshooting |
 
 ## Maintaining a release
@@ -120,11 +134,13 @@ are SIL Open Font Licence, which covers video.
 
 ## What has and has not been tested
 
-Tested before release, on a 2023 Windows 11 laptop with integrated graphics and in a clean Linux
-container built from the zip: set-up, the template and the example film end to end, every tool's
-own test suite, and two independent code reviews whose findings were all fixed. Not tested yet: a
-fresh agent making a film from this folder alone, macOS, and agents other than the ones the
-author uses (their instruction files are set up from each one's documentation). The connectors
-are tested against local mocks built from each provider's documentation, with the error replies
-that could only be guessed marked as guesses, because no keys were used. The details are in
-`docs/testing.md`.
+Version 0.2 was tested on a Mac with an Apple M5 chip, from a fresh clone: set-up, the
+doctor, the template, Hark and the narrated Neap example end to end through every release gate,
+Kokoro narration, and every tool's own test suite. Continuous integration runs the tests on Linux
+and macOS and renders in a clean Linux container. Version 0.1 was tested on a 2023 Windows 11
+laptop and in that container; the 0.2 changes were not re-run on Windows by hand, only through the
+tests that run everywhere. Not tested yet: a fresh agent making a film from this folder alone,
+agents other than the ones the author uses, and the narration engine itself on Windows or Linux.
+Nobody has listened to the example's voice; it was checked by measurement. The connectors are
+tested against local mocks built from each provider's documentation, because no keys were used.
+The details are in `docs/testing.md`.

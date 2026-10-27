@@ -20,11 +20,12 @@ test('the verdict is PASS only when every step ran and passed', () => {
 
 test('steps that never ran are reported NOT RUN, with the reason', () => {
 	const steps = complete([pass('typecheck'), {name: 'slop-lint', status: STATUS.FAIL, detail: '1 errors'}], 'not run: slop-lint failed first');
-	assert.deepEqual(steps.map((s) => s.status), ['PASS', 'FAIL', 'NOT RUN', 'NOT RUN', 'NOT RUN', 'NOT RUN', 'NOT RUN', 'NOT RUN']);
+	assert.deepEqual(steps.map((s) => s.status), ['PASS', 'FAIL', 'NOT RUN', 'NOT RUN', 'NOT RUN', 'NOT RUN', 'NOT RUN', 'NOT RUN', 'NOT RUN']);
+	assert.deepEqual(STEPS, ['typecheck', 'slop-lint', 'provenance', 'score', 'render', 'master', 'narration', 'audit', 'delivery']);
 	const md = reportMarkdown({id: 'demo', steps, when: 'now'});
 	assert.match(md, /Verdict: \*\*FAIL\*\*/);
 	assert.match(md, /\| render \| NOT RUN \| not run: slop-lint failed first \|/);
-	assert.doesNotMatch(md, /\| (provenance|score|render|master|audit|delivery) \| PASS/);
+	assert.doesNotMatch(md, /\| (provenance|score|render|master|narration|audit|delivery) \| PASS/);
 });
 
 // Generated media written the way connectors/lib/output.mjs and core.mjs write it.
@@ -69,7 +70,7 @@ test('release fails at the provenance step, and reports everything after it NOT 
 	const report = readFileSync(path.join(kit, 'out', 'demo', 'report.md'), 'utf8');
 	assert.match(report, /Verdict: \*\*FAIL\*\*/);
 	assert.match(report, /\| provenance \| FAIL \| public\/films\/demo\/media\/plate\.png has no "done" line/);
-	for (const step of ['score', 'render', 'master', 'audit', 'delivery']) assert.match(report, new RegExp(`\\| ${step} \\| NOT RUN \\|`));
+	for (const step of ['score', 'render', 'master', 'narration', 'audit', 'delivery']) assert.match(report, new RegExp(`\\| ${step} \\| NOT RUN \\|`));
 });
 
 test('delivery checks pass a proper master and catch an unplayable one', (t) => {

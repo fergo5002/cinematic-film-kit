@@ -6,3 +6,5 @@ film.local.json
 .env
 .env.*
 !.env.example
+narration/node_modules
+.cache

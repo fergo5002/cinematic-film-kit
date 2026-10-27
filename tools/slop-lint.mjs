@@ -6,6 +6,8 @@
  * that can be detected statically is detected here, and the serious ones fail the build. What
  * it cannot see (ideas, composition, truth) stays with the critic.
  *
+ * Lints code, markdown and a film's narration.txt (its script is on-screen copy as captions).
+ *
  * Usage: npm run lint:slop -- <film-id> [--strict] [--json]
  *        node tools/slop-lint.mjs <folder> [--strict] [--json]
  *   A film id lints src/films/<id>. Exit 1 on any error, or on any warning with --strict.
@@ -50,7 +52,7 @@ const walk = (dir) => {
 		const st = statSync(p);
 		if (st.isDirectory()) {
 			if (!SKIP_DIRS.has(name)) walk(p);
-		} else if (EXT.has(path.extname(name)) && st.size < 2_000_000 && !name.endsWith('.lock') && name !== 'package-lock.json') {
+		} else if ((EXT.has(path.extname(name)) || name === 'narration.txt') && st.size < 2_000_000 && !name.endsWith('.lock') && name !== 'package-lock.json') {
 			files.push(p);
 		}
 	}
