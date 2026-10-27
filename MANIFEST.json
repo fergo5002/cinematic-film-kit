@@ -529,8 +529,8 @@
     },
     {
       "path": "docs/narration.md",
-      "bytes": 10925,
-      "sha256": "682d6c3640b5517ea40876015905231d58938cce450ae9fe62a84ddc8920e2cb"
+      "bytes": 11286,
+      "sha256": "599b7728ca5b43dd81688c7499e3109d49480a1340d908563c2c5bd6936789fa"
     },
     {
       "path": "docs/testing.md",
@@ -674,8 +674,8 @@
     },
     {
       "path": "public/films/neap/narration/meta.json",
-      "bytes": 4271,
-      "sha256": "cc01528f679dcc17c470d8a9e0803b464bd184ffa5b04a94950e137d48068c40"
+      "bytes": 4272,
+      "sha256": "657ec7f03e21e9717d35aeb6c4b82140073bd2b33d28418bcac04fb527df7aca"
     },
     {
       "path": "public/films/neap/narration/narration.wav",
@@ -939,8 +939,8 @@
     },
     {
       "path": "src/films/neap/data/narration.json",
-      "bytes": 5028,
-      "sha256": "ee484cdda541d49a00746263aaf82536b2e1b5ad869daa0d4c4e9e5b822ba753"
+      "bytes": 5184,
+      "sha256": "bc4e3bd07317474c462a6619d993793f5f66302c7cf6bb4d55cf5e884f878dc4"
     },
     {
       "path": "src/films/neap/expected.md",
@@ -1119,8 +1119,8 @@
     },
     {
       "path": "tools/lib/narration/check.mjs",
-      "bytes": 6640,
-      "sha256": "d4a1f3139c10703fd65968a0367130b6075650f92383028cc2462eb8739c5dd2"
+      "bytes": 7914,
+      "sha256": "f2ce73473dbfc9f3cd9fc6be9d75a397b650301ce2e0cca823f41170ee7b380a"
     },
     {
       "path": "tools/lib/narration/loudness.mjs",
@@ -1139,13 +1139,18 @@
     },
     {
       "path": "tools/lib/narration/pipeline.mjs",
-      "bytes": 9562,
-      "sha256": "83c66be76be1807a58d1ddda5187e2ea2e9141728b5e1b8ac44ba5ad7e7e0c48"
+      "bytes": 9668,
+      "sha256": "af7f29e14d0fca367be388041e82a68f256c280beadb2c1815bdbbc0fb8ed446"
     },
     {
       "path": "tools/lib/narration/script.mjs",
-      "bytes": 7280,
-      "sha256": "740f96fde84512bbab4de5d87e21cc0cd1f7002d564dc6a2d47de48e3467a524"
+      "bytes": 7313,
+      "sha256": "5b7a0b92f94670a4272c7b5be8fa9ab4d3a7797d7b97accec93c4a9d713a28de"
+    },
+    {
+      "path": "tools/lib/narration/settings.mjs",
+      "bytes": 502,
+      "sha256": "a1bae07b59b39ab39911786d2e0450a430528e7be069c2fc3d0c26dc03d45b9c"
     },
     {
       "path": "tools/lib/narration/spans.mjs",
@@ -1179,8 +1184,8 @@
     },
     {
       "path": "tools/narrate.mjs",
-      "bytes": 8048,
-      "sha256": "dff1ffe2a38d766bb77627b430aa62bcdaf38bc9ef024d7baa8a95140a9b2bdb"
+      "bytes": 9584,
+      "sha256": "862a42a7d08b2f9c3c6c0cacc743008de50147e4e2430713f6a473271773fed4"
     },
     {
       "path": "tools/new-film.mjs",
@@ -1199,8 +1204,8 @@
     },
     {
       "path": "tools/release.mjs",
-      "bytes": 8351,
-      "sha256": "fcc489bcd2ca3219f415f0ed9657ebea6bf5d741825e639c003e31d5a5fa85a2"
+      "bytes": 8402,
+      "sha256": "a79210160d3a0a0d877f2a8626f11e29f82a3d788b144386e8fa0f19f397d1e2"
     },
     {
       "path": "tools/render.mjs",
@@ -1229,8 +1234,8 @@
     },
     {
       "path": "tools/slop-lint.mjs",
-      "bytes": 17987,
-      "sha256": "b007d3e68d74f7e1813789b56568dbe41d88aee032db399392dcde9e3c91c69b"
+      "bytes": 18030,
+      "sha256": "23ea7f132a3a63bb86f1841512694097101b5a75eff2eafa96a51f7515b963f3"
     },
     {
       "path": "tools/stills.mjs",
@@ -1314,8 +1319,8 @@
     },
     {
       "path": "tools/test/narrate.test.mjs",
-      "bytes": 4615,
-      "sha256": "093214c1d2c761e2fa3bc0b16055bc666ca458fea3df7bd96257ac9e833deaa5"
+      "bytes": 6528,
+      "sha256": "781563fea9f7a81aab1be322ed49b05c9938d1eb2b2bf9bb8fe8e6e4b5cc8e07"
     },
     {
       "path": "tools/test/narration-align.test.mjs",
@@ -1354,18 +1359,18 @@
     },
     {
       "path": "tools/test/narration-pipeline.test.mjs",
-      "bytes": 4855,
-      "sha256": "4489fccf4a85d158664c94792122c15720ca2e166bd64bdc577d2ee89e46bc2a"
+      "bytes": 5371,
+      "sha256": "d167de6d8a6e888b8453c2d97f7faeb9cd2f0df342078502bd40e816fa498a06"
     },
     {
       "path": "tools/test/narration-release.test.mjs",
-      "bytes": 6348,
-      "sha256": "2b953752ec2b0cc68fbe22832b4edb5e7e4ca240664642cc6bbd2ea3d458e608"
+      "bytes": 7648,
+      "sha256": "2d9a894a4330b83cb756a90ed732543d4927ea829c0d2e4a69dfe5cad4a31ef1"
     },
     {
       "path": "tools/test/narration-script.test.mjs",
-      "bytes": 6372,
-      "sha256": "81b3b001f6558404fe981db51407a7941850b03a22becf3d93ee042c5dce0487"
+      "bytes": 6448,
+      "sha256": "61410a427887bb8db33adf06cd3eac45bf53637291a03d9179742915d726da9d"
     },
     {
       "path": "tools/test/narration-timeline.test.mjs",
@@ -1399,8 +1404,8 @@
     },
     {
       "path": "tools/test/slop-lint.test.mjs",
-      "bytes": 6680,
-      "sha256": "d7ba008a037ba7def606fccfd6c1e3eb73d35eddede9d77f485f01b0c41c516a"
+      "bytes": 7182,
+      "sha256": "f467195dcb8a38e60518404732fed54593f2c0c3c79dedf8dab18ea4445eb4e2"
     },
     {
       "path": "tools/test/voice.test.mjs",
