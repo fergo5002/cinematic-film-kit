@@ -10,11 +10,13 @@ Read it all once, then read the skill before any film work.
 - `.agents/skills/cinematic-film/SKILL.md`: the craft. Read it before you write a beat, and read
   the references it points to when a task needs them. It is the standard you are held to.
 - `src/films/<id>/`: one folder per film. `src/films/hark/` is the worked example (a made-up
-  birdsong app, 22 s) and `src/films/template/` is the starting point `new-film` copies.
+  birdsong app, 22 s), `src/films/neap/` the narrated one (a made-up tide app, 21 s) and
+  `src/films/template/` is the starting point `new-film` copies.
 - `src/engine/`, `audio/`, `tools/`: shared code. Do not edit these, the example or the template
   unless the person asks. If a film needs a change to shared code, copy the file into the film's
   folder and change the copy.
 - `connectors/`: optional paid generation (see section 7). Off unless the person turns it on.
+- `narration/`: optional local narration (see section 8). Not installed until someone asks for it.
 - `reviews/prompts/`: the cold explain-back and the critic.
 - `examples/hark/`: the example's finished film and its review records. Watch it before your
   first film: it is the bar.
@@ -29,6 +31,8 @@ Read it all once, then read the skill before any film work.
    each graphics backend and records the one that works in `film.local.json`.
 3. If the folder is not a git repository, `git init` and commit, so every film has history.
 
+Narration is not part of set-up. Install it only when a film needs a voice (section 8).
+
 ## 3. Making a film: the process
 
 Work in this order. Each step leaves a file behind, so the person can see the work and you can
@@ -41,9 +45,10 @@ everything else make a sensible choice, write it down in the brief and proceed.
 | Facts: what is true about the product, with sources; real UI evidence if it is a product film | `facts.md` | |
 | Concept: three directions, each with its mechanic (how the form argues the thesis); pick one and say why | `concept.md` | |
 | Treatment: beats with timings at the chosen BPM, what is on screen and what is heard | `treatment.md` | |
-| Timing: sections and named moments | `beatmap.ts` | |
+| Narration, only if the film has a voice (section 8): the script, voiced, before the timing | `narration.txt`, `data/narration.json` | `npm run narrate -- <id>` |
+| Timing: sections and named moments (in a narrated film, from the words) | `beatmap.ts` | |
 | Style frames: the key frames, built in code, reviewed as stills before any full render | `out/<id>/stills/` | `npm run stills -- <id> <frames>` |
-| Score: synthesised from the same beatmap, so sync is structural | `score.mjs` | `npm run score -- <id>` |
+| Score: synthesised from the same beatmap, so sync is structural; ducked under the voice if there is one | `score.mjs` | `npm run score -- <id>` |
 | Preview, then render and master | `out/<id>/<id>.mp4` | `npm run preview -- <id>`, `npm run render -- <id>`, `npm run master -- <id>` |
 | Audit and slop lint | `out/<id>/audit.json` | `npm run audit -- <id>`, `npm run lint:slop -- <id>` |
 | Reviews: cold explain-back and critic (section 5) | `reviews.md` | `npm run packet -- <id>` |
@@ -57,9 +62,10 @@ obvious in a picture. Iterate in rounds: stills, fix, stills.
 
 `npm run release -- <id>` runs them in order and writes `out/<id>/report.md`. A gate that did not
 run is reported NOT RUN, never PASS. The bands (settled runs, motion energy, luminance, loudness
--16 to -13 LUFS, loudness range 6 to 13 LU, true peak -3 to -1 dBTP) and the reasons for them are
-in the skill. Passing the gates is the floor, not the bar: the reviews and the person decide
-whether the film is good.
+-16 to -13 LUFS, loudness range 6 to 13 LU or 2.5 to 13 LU for a narrated film, true peak -3 to
+-1 dBTP) and the reasons for them are in the skill. A narrated film also passes the narration step
+(section 8); a film without narration passes it as "no narration". Passing the gates is the floor,
+not the bar: the reviews and the person decide whether the film is good.
 
 ## 5. Reviews: independent or labelled
 
@@ -120,7 +126,32 @@ speech generation through `connectors/film-gen.mjs`, never by calling providers 
 - The budget and ledger are per film (`public/films/<id>/media/ledger.jsonl`). Never edit the
   ledger or a `.prov.json` sidecar; the release gate fails on media without them.
 
-## 8. Never
+## 8. Narration: a local voice, only when the film needs one
+
+Most short films should not be narrated: words on screen, the score and the picture carry them.
+Narrate when the brief asks for a voice, when the film must explain in more words than the screen
+can hold, or when it has to work for people who cannot read the screen. Never add a voice by habit,
+and never one that repeats what is already on screen. `docs/narration.md` has the whole method; the
+rules that matter:
+
+- Set up once, with the person's yes (about 750 MB, all inside this folder): `npm run narrate -- --setup`.
+- Write `src/films/<id>/narration.txt`, one phrase per line, `[pause 0.6]` for a set silence. Add
+  `export const NARRATION = {voice: 'af_heart', speed: 1, at: <frame>}` to the beatmap. Run
+  `npm run narrate -- <id>`, then `npm run score -- <id>`.
+- The voice leads. Time the picture from its words (`wordAt` in `src/engine/narration.ts`, as
+  `src/films/neap/moments.ts` does), play `narration.wav` at the top level, and duck the bed with
+  `duckUnderSpeech` in `score.mjs` (the template already does). Put hits in the pauses, never on a
+  number, a name or the offer.
+- Pace 140 to 170 words a minute with the pauses. Never speed speech up (above 1.0 is refused) and
+  never time-compress it in the edit: cut words or give the picture more time.
+- Captions: `<Captions cues={narration.cues} />` burns them in; the master writes `.srt` and `.vtt`
+  beside the film either way.
+- Say it is an AI-generated voice: a credit on the end card or in the post text. Never clone or
+  imitate a real person's voice.
+- Nobody, you included, has heard the voice until a person listens to the whole track with the
+  captions off. Say so when you hand it over.
+
+## 9. Never
 
 - `Math.random()` or wall-clock time in anything that renders. Use the seeded helpers in
   `src/engine/lib/prng.ts`; every frame must be a pure function of its number.
@@ -132,6 +163,6 @@ speech generation through `connectors/film-gen.mjs`, never by calling providers 
 - Em dashes or en dashes in on-screen copy. They read as machine-written.
 - Writing outside this folder, deleting the person's files, or committing secrets.
 
-## 9. If you are a chat model without a terminal
+## 10. If you are a chat model without a terminal
 
 Read `CHAT.md` instead: it explains how to work through the person, one command at a time.

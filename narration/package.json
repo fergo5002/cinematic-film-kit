@@ -1,0 +1,16 @@
+{
+  "name": "cinematic-film-kit-narration",
+  "private": true,
+  "description": "Optional local narration for the film kit: Kokoro-82M text to speech through kokoro-js. Installed only by npm run narrate -- --setup.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "3.8.1",
+    "kokoro-js": "1.2.1",
+    "onnxruntime-node": "1.21.0",
+    "phonemizer": "1.2.1"
+  }
+}

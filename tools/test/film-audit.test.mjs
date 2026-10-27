@@ -2,7 +2,7 @@
 // frames and a tone of known loudness. If these drift, the audit is measuring something else.
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
-import {copyFileSync, readFileSync} from 'node:fs';
+import {copyFileSync, mkdirSync, readFileSync, writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {test} from 'node:test';
 import {parseEncoderList, testVideoEncoder} from '../lib/ffmpeg.mjs';
@@ -132,4 +132,42 @@ test('an unknown film id or file is a usage error, not a crash', () => {
 	const r = node([audit, 'no-such-film-here']);
 	assert.equal(r.status, 2);
 	assert.match(r.stderr, /No such film id or file|No film "no-such-film-here"/);
+});
+
+// Speech-led films have less loudness range than music-led ones: of the eleven product films in the
+// corpus whose detected speech starts in their first 8 seconds and runs past 80% of their length,
+// seven measure under 6 LU, and the lowest is 2.6. So a narrated film's floor is 2.5 LU; everything
+// else keeps 6.
+test('a narrated film is held to the speech-led loudness-range floor, and says so', (t) => {
+	const dir = tempDir(t, 'film-audit-');
+	const film = path.join(dir, 'two-levels.mp4');
+	// a tone at -20 LUFS for 6 s, then about 3.3 LU quieter: LRA about 3.8 LU
+	const tone = "if(lt(t,6),0.1,0.065)*sin(2*PI*997*t)";
+	const made = spawnSync('ffmpeg', ['-hide_banner', '-v', 'error', '-y', '-f', 'lavfi', '-i', 'color=c=0x203040:s=320x180:r=30:d=12', '-f', 'lavfi', '-i', `aevalsrc='${tone}|${tone}':s=48000:d=12`, '-c:v', 'mpeg4', '-c:a', 'aac', '-b:a', '192k', '-shortest', film], {encoding: 'utf8'});
+	assert.equal(made.status, 0, made.stderr);
+	const lraOf = (args) => {
+		const json = path.join(dir, `${args.length}.json`);
+		node([audit, film, '--target-duration', '12', '--json', json, ...args]);
+		const out = JSON.parse(readFileSync(json, 'utf8'));
+		return {gate: out.results.find((g) => g.name === 'loudness range'), narrated: out.narrated};
+	};
+	const plain = lraOf([]);
+	assert.equal(plain.gate.status, 'FAIL', JSON.stringify(plain.gate));
+	assert.match(plain.gate.expected, /^6 to 13 LU/);
+	const spoken = lraOf(['--narrated']);
+	assert.equal(spoken.gate.status, 'PASS', JSON.stringify(spoken.gate));
+	assert.match(spoken.gate.expected, /^2\.5 to 13 LU/);
+	assert.equal(spoken.narrated, true);
+});
+
+test('a film id with data/narration.json is audited as narrated', (t) => {
+	const kit = tempKit(t);
+	const dir = writeBeatmap(kit, 'tide');
+	makeSyntheticFilm(path.join(kit, 'out', 'tide', 'tide.mp4'));
+	mkdirSync(path.join(dir, 'data'), {recursive: true});
+	writeFileSync(path.join(dir, 'data', 'narration.json'), '{"words": []}');
+	node([path.join(kit, 'tools', 'film-audit.mjs'), 'tide'], {cwd: kit});
+	const out = JSON.parse(readFileSync(path.join(kit, 'out', 'tide', 'audit.json'), 'utf8'));
+	assert.equal(out.narrated, true);
+	assert.match(out.results.find((g) => g.name === 'loudness range').expected, /^2\.5 to 13 LU/);
 });

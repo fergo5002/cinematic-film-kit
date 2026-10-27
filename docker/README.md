@@ -42,3 +42,10 @@ Software rendering costs time. Measured on 2 October 2026 with 8 CPU cores given
 template film released in the container at 0.4 s a frame (270 frames in 108 s), against 0.15 to
 0.26 s a frame on a laptop GPU. A heavier shader widens that gap a lot, because the GPU's work
 moves onto the CPU. Preview first (`npm run preview -- <id>`) to keep the wait short.
+
+## Narration
+
+The image does not include the optional narration (`docs/narration.md`): its packages and model are
+left out of the build. A narrated film whose voice is already made (its `public/films/<id>/narration/`
+is mounted) renders and releases in the container like any other. To voice a script, run
+`npm run narrate` on your own machine, or install it in a container of your own.

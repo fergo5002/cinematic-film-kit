@@ -10,7 +10,7 @@ lands on the beat, and `score.mjs` writing the soundtrack from the same beatmap.
 | `beatmap.ts` | every frame number: sections, named moments, the audit profile |
 | `Template.tsx` | the film, one shot (new films get a component named after them) |
 | `theme.ts` | colours and type styles |
-| `score.mjs` | the soundtrack, written to `public/films/template/score.wav` |
+| `score.mjs` | the soundtrack, written to `public/films/template/score.wav`; if the film is narrated, it ducks under the voice |
 | `brief.md`, `treatment.md`, `expected.md` | the paper trail, filled in as an example (new films get blank ones) |
 
 The generated `public/films/template/score.wav` ships with the kit so the template plays straight

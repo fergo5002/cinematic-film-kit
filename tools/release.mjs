@@ -2,7 +2,8 @@
 // npm run release -- <id> [--from <step>]
 //
 // The gates in order: typecheck, slop-lint, provenance (generated media must carry its sidecar and
-// ledger line), score, render, master, audit, delivery. The first
+// ledger line), score, render, master, narration (a narrated film carries its disclosure and keeps
+// its bed under the voice; a film without narration passes), audit, delivery. The first
 // failure stops the run; every later step is reported NOT RUN, never PASS. The report goes to
 // out/<id>/report.md. --from <step> starts part way (for example --from master after a render you
 // trust); the skipped steps are NOT RUN too, so that release reads INCOMPLETE rather than PASS.
@@ -13,6 +14,7 @@ import path from 'node:path';
 import {firstLineVersion, probeMedia} from './lib/ffmpeg.mjs';
 import {ROOT, UsageError, capture, filmDir, loadBeatmap, main, outputs, parseArgs, rel, requireFilm} from './lib/kit.mjs';
 import {STATUS, STEPS, checkProvenance, complete, deliveryChecks, reportMarkdown, topLevelAtoms, verdict} from './lib/release.mjs';
+import {checkNarration} from './lib/narration/check.mjs';
 import {glFor, writeFilmEntry} from './lib/remotion.mjs';
 
 // Run a child, show its output live, keep the tail for the report.
@@ -102,6 +104,13 @@ main(async () => {
 		['master', async () => {
 			const r = await runChild([tool('master.mjs'), id], 'master');
 			return r.code === 0 ? {status: STATUS.PASS, detail: lastLines(r.tail, 1)} : {status: STATUS.FAIL, detail: lastLines(r.tail)};
+		}],
+		['narration', async () => {
+			const r = checkNarration(ROOT, id, {narration: beat.module.NARRATION, fps: beat.fps});
+			for (const p of r.problems) console.log(`FAIL  ${p}`);
+			for (const n of r.notes) console.log(`note  ${n}`);
+			console.log(r.detail);
+			return {status: r.status === 'PASS' ? STATUS.PASS : STATUS.FAIL, detail: r.detail};
 		}],
 		['audit', async () => {
 			const r = await runChild([tool('film-audit.mjs'), id], 'audit');

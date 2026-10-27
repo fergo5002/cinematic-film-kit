@@ -45,7 +45,7 @@
  * Usage:
  *   node tools/film-audit.mjs <film-id | video> [--profile dark|standard|light|ui-light]
  *        [--target-duration 60] [--scene-threshold 0.05] [--json out.json] [--baseline]
- *        [--source master|raw|preview] [--lufs-min -16] [--lufs-max -13]
+ *        [--source master|raw|preview] [--lufs-min -16] [--lufs-max -13] [--narrated]
  *
  * With a film id it audits out/<id>/<id>.mp4 (the master), takes the target
  * duration from the film's beatmap, takes the profile from the beatmap's
@@ -75,7 +75,7 @@ const shownPath = (p) => {
 };
 
 main(async () => {
-	const {positional, flags} = parseArgs(process.argv.slice(2), {booleans: ['baseline']});
+	const {positional, flags} = parseArgs(process.argv.slice(2), {booleans: ['baseline', 'narrated']});
 	const target0 = positional[0];
 	if (!target0) throw new UsageError('usage: npm run audit -- <film-id> [--profile dark|standard|light|ui-light]   or   node tools/film-audit.mjs <video>');
 
@@ -85,6 +85,8 @@ main(async () => {
 	let TARGET = flags['target-duration'] !== undefined ? Number(flags['target-duration']) : 60;
 	let PROFILE = flags.profile ?? 'dark';
 	let JSON_OUT = typeof flags.json === 'string' ? flags.json : null;
+	// A narrated film (src/films/<id>/data/narration.json, or --narrated for a file) is speech-led.
+	let NARRATED = flags.narrated === true;
 	let lufsMin = flags['lufs-min'] !== undefined ? Number(flags['lufs-min']) : -16;
 	let lufsMax = flags['lufs-max'] !== undefined ? Number(flags['lufs-max']) : -13;
 	let SCENE = flags['scene-threshold'] !== undefined ? Number(flags['scene-threshold']) : 0.05;
@@ -99,6 +101,7 @@ main(async () => {
 			throw new UsageError(`${path.relative(process.cwd(), file)} does not exist yet. Make it first: ${how}`);
 		}
 		const beat = await loadBeatmap(film);
+		if (existsSync(path.join(ROOT, 'src', 'films', film, 'data', 'narration.json'))) NARRATED = true;
 		if (flags['target-duration'] === undefined) TARGET = beat.seconds;
 		if (flags.profile === undefined && beat.audit.profile) PROFILE = beat.audit.profile;
 		if (flags['lufs-min'] === undefined && beat.audit.lufsMin !== undefined) lufsMin = Number(beat.audit.lufsMin);
@@ -215,7 +218,11 @@ main(async () => {
 		lufsMax,
 		truePeakMin: -3.0,
 		truePeakMax: -1.0,
-		lraMin: 6.0,
+		// Speech-led films measure less range than music-led ones. Of the eleven product films in
+		// references/corpus whose detected speech starts in their first 8 seconds and runs past 80%
+		// of their length, seven measure under 6 LU; they span 2.6 (Samsung's Galaxy S26 Ultra film)
+		// to 8.2. So a narrated film's floor is 2.5 LU. Unnarrated films keep 6.
+		lraMin: NARRATED ? 2.5 : 6.0,
 		lraMax: 13.0,
 	};
 
@@ -611,7 +618,7 @@ main(async () => {
 		} else {
 			gate('integrated loudness', I >= T.lufsMin && I <= T.lufsMax, `${I} LUFS`, `${T.lufsMin} to ${T.lufsMax} LUFS`);
 			gate('true peak', TP >= T.truePeakMin && TP <= T.truePeakMax, `${TP} dBTP`, `${T.truePeakMin} to ${T.truePeakMax} dBTP`);
-			gate('loudness range', LRA >= T.lraMin && LRA <= T.lraMax, `${LRA} LU`, `${T.lraMin} to ${T.lraMax} LU`, 'the first failure measured 2.8 LU, a flat loop with no arc');
+			gate('loudness range', LRA >= T.lraMin && LRA <= T.lraMax, `${LRA} LU`, `${T.lraMin} to ${T.lraMax} LU`, NARRATED ? 'narrated: speech-led films in the corpus measure 2.6 to 8.2 LU' : 'the first failure measured 2.8 LU, a flat loop with no arc');
 		}
 	}
 
@@ -635,7 +642,7 @@ main(async () => {
 	if (JSON_OUT) {
 		mkdirSync(path.dirname(path.resolve(JSON_OUT)), {recursive: true});
 		const verdict = BASELINE ? 'BASELINE' : fails.length ? 'FAIL' : 'PASS';
-		writeFileSync(JSON_OUT, JSON.stringify({version: 4, file: shownPath(file), film, profile: PROFILE, target: TARGET, scene: SCENE, duration, fps, verdict, counts: {pass: passes.length, warn: warns.length, fail: fails.length}, results, measured}, null, 2));
+		writeFileSync(JSON_OUT, JSON.stringify({version: 4, file: shownPath(file), film, profile: PROFILE, narrated: NARRATED, target: TARGET, scene: SCENE, duration, fps, verdict, counts: {pass: passes.length, warn: warns.length, fail: fails.length}, results, measured}, null, 2));
 		console.log(`json written to ${JSON_OUT}`);
 	}
 

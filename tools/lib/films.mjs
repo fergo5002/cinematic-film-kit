@@ -1,5 +1,5 @@
 // Film folders and the registry: pure helpers shared by tools/new-film.mjs and its tests.
-import {writeFileSync} from 'node:fs';
+import {existsSync, statSync, writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {FILMS_DIR, listFilms} from './kit.mjs';
 
@@ -24,6 +24,21 @@ export const componentName = (id, taken = []) => {
 	// film.ts and Film.tsx clash on a case-insensitive disk, and so would theme.ts and Theme.tsx.
 	if (taken.some((t) => t.toLowerCase() === name.toLowerCase())) name = `${name}Film`;
 	return name;
+};
+
+// A film with a score.mjs needs its score.wav before it renders, and a stale one lies: older than
+// score.mjs or beatmap.ts, or older than the narration its bed ducks under (data/narration.json).
+// `root` is the kit (a parameter so tests can use a copy). Returns null, {warn} or {fatal}.
+export const scoreStatus = (root, id) => {
+	const film = path.join(root, 'src', 'films', id);
+	if (!existsSync(path.join(film, 'score.mjs'))) return null;
+	const wav = path.join(root, 'public', 'films', id, 'score.wav');
+	if (!existsSync(wav)) return {fatal: `public/films/${id}/score.wav is missing. Run: npm run score -- ${id}`};
+	const age = statSync(wav).mtimeMs;
+	const newer = ['score.mjs', 'beatmap.ts', 'data/narration.json'].filter((f) => existsSync(path.join(film, f)) && statSync(path.join(film, f)).mtimeMs > age);
+	if (!newer.length) return null;
+	const why = newer.includes('data/narration.json') ? ', so its bed no longer ducks under the voice as it is now' : '';
+	return {warn: `public/films/${id}/score.wav is older than ${newer.map((f) => `src/films/${id}/${f}`).join(' and ')}${why}. Run: npm run score -- ${id}`};
 };
 
 export const titleFrom = (id) => {

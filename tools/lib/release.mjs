@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {closeSync, existsSync, fstatSync, openSync, readFileSync, readSync, readdirSync, statSync} from 'node:fs';
 import path from 'node:path';
 
-export const STEPS = ['typecheck', 'slop-lint', 'provenance', 'score', 'render', 'master', 'audit', 'delivery'];
+export const STEPS = ['typecheck', 'slop-lint', 'provenance', 'score', 'render', 'master', 'narration', 'audit', 'delivery'];
 
 export const STATUS = {PASS: 'PASS', FAIL: 'FAIL', NOT_RUN: 'NOT RUN'};
 

@@ -1,10 +1,18 @@
 // Bundling and rendering through Remotion's Node APIs. Every film renders from its own generated
 // entry point (out/.entry/<id>/index.tsx), so a half-written film in another folder can never stop
 // this one rendering. Studio still shows every film through src/index.ts.
-import {cpSync, existsSync, mkdirSync, rmSync, writeFileSync} from 'node:fs';
+import {cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {OUT_DIR, PUBLIC_DIR, ROOT, UsageError, filmDir} from './kit.mjs';
 import {resolveGl} from './gl.mjs';
+
+// The Remotion version the kit is tested with: whatever package.json pins, so the doctor and the
+// pin cannot drift apart.
+export const pinnedRemotion = (root = ROOT) => JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8')).dependencies?.remotion ?? null;
+
+// Whether the Chrome Headless Shell on disk is the build this Remotion expects. Remotion writes its
+// own patched builds (macOS arm64 and most Linux, from 4.0.539) as "<version>-remotion-v<n>".
+export const browserMatches = (version, expected) => !expected || version === expected || new RegExp(`^${expected.replace(/\./g, '\\.')}-remotion-v\\d+$`).test(String(version));
 
 export const loadRemotion = async () => {
 	try {

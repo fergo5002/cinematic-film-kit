@@ -8,6 +8,7 @@
 import {mkdir} from 'node:fs/promises';
 import {DURATION, M, sec} from './beatmap.ts';
 import {Biquad, Bus, SR, adsr, assertFinite, dbToGain, fdnReverb, midiToHz, mulberry32, pan, sawAt, softClip, writeWav24} from '../../../audio/dsp.mjs';
+import {duckUnderSpeech, narrationWords} from '../../../audio/voice.mjs';
 
 const LEN = sec(DURATION);
 const rnd = mulberry32(1729); // seeded: the same score every run
@@ -163,6 +164,9 @@ for (let i = 0; i < master.n; i++) {
 	master.L[i] *= norm;
 	master.R[i] *= norm;
 }
+// If the film is narrated (npm run narrate writes data/narration.json), the bed dips 10 dB under
+// every spoken phrase so the voice leads. With no narration this does nothing at all.
+duckUnderSpeech(master, narrationWords(new URL('./data/narration.json', import.meta.url)));
 assertFinite(master, 'score');
 await mkdir(new URL('../../../public/films/template/', import.meta.url), {recursive: true});
 await writeWav24(new URL('../../../public/films/template/score.wav', import.meta.url), master);

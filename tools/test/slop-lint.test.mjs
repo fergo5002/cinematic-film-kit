@@ -133,3 +133,22 @@ test('a film id lints src/films/<id>, and the template is clean', () => {
 	assert.deepEqual(serious, [], 'the template must have no errors or warnings: new films are copies of it');
 	assert.equal(code, 0);
 });
+
+test('a film\'s narration script is linted too: an em dash in it is an error, as in any copy', (t) => {
+	const tmp = mkdtempSync(path.join(os.tmpdir(), 'slop-narr-'));
+	t.after(() => rmSync(tmp, {recursive: true, force: true}));
+	writeFileSync(path.join(tmp, 'narration.txt'), 'The sea keeps its own time.\nTwice a day \u2014 between the tides \u2014 it stops.\n');
+	writeFileSync(path.join(tmp, 'notes.txt'), 'Other text files are not copy \u2014 this one is left alone.\n');
+	const {code, report} = run(tmp);
+	assert.equal(code, 1);
+	const dashes = report.findings.filter((f) => f.rule === 'em-dash');
+	assert.deepEqual(dashes.map((f) => [f.file, f.line, f.sev]), [['narration.txt', 2, 'error']]);
+});
+
+test('the copy rules read a narration script too: it is what the voice says and the captions show', (t) => {
+	const tmp = mkdtempSync(path.join(os.tmpdir(), 'slop-narr-copy-'));
+	t.after(() => rmSync(tmp, {recursive: true, force: true}));
+	writeFileSync(path.join(tmp, 'narration.txt'), 'Introducing a seamless way to unlock the tides.\n');
+	const {report} = run(tmp);
+	assert.ok(report.findings.some((f) => f.rule === 'slop-copy' && f.file === 'narration.txt'), JSON.stringify(report.findings));
+});
