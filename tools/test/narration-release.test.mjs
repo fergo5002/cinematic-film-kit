@@ -108,3 +108,23 @@ test('narration.txt with nothing voiced yet fails with the command to run', (t) 
 	assert.equal(r.status, 'FAIL');
 	assert.match(r.detail, /npm run narrate -- tide/);
 });
+
+test('a damaged narration record fails the step with a reason instead of crashing the release', async (t) => {
+	const kit = await narratedFilm(t);
+	writeFileSync(path.join(kit, 'public', 'films', 'tide', 'narration', 'meta.json'), '{"ai_generated": tr');
+	const r = checkNarration(kit, 'tide');
+	assert.equal(r.status, 'FAIL');
+	assert.match(r.detail, /meta\.json/);
+});
+
+test('changing the voice, speed or start in the beatmap after voicing fails until it is voiced again', async (t) => {
+	const kit = await narratedFilm(t);
+	const data = path.join(kit, 'src', 'films', 'tide', 'data', 'narration.json');
+	writeFileSync(data, JSON.stringify({voice: 'bf_emma', disclosure: DISCLOSURE, words: WORDS, settings: {voice: 'bf_emma', speed: 0.92, at: 30}}));
+	assert.equal(checkNarration(kit, 'tide', {narration: {voice: 'bf_emma', speed: 0.92, at: 30}, fps: 30}).status, 'PASS');
+	const moved = checkNarration(kit, 'tide', {narration: {voice: 'bf_emma', speed: 0.92, at: 45}, fps: 30});
+	assert.equal(moved.status, 'FAIL');
+	assert.match(moved.problems.join(' '), /NARRATION\.at in beatmap\.ts is 45 but the narration was voiced with 30/);
+	const other = checkNarration(kit, 'tide', {narration: {voice: 'am_michael', speed: 0.92, at: 30}, fps: 30});
+	assert.match(other.problems.join(' '), /voice/);
+});

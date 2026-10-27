@@ -136,9 +136,9 @@
   "speech_seconds": 11.18,
   "words_per_minute": 204,
   "pace_wpm": 150,
-  "synth_seconds": 3.62,
+  "synth_seconds": 4.141,
   "engine_audio_seconds": 15.5,
-  "real_time_factor": 0.234
+  "real_time_factor": 0.267
  },
  "duration": 18.03,
  "loudness": {
@@ -186,7 +186,7 @@
   "licence": "Apache-2.0 (the model cards of hexgrad/Kokoro-82M and of this ONNX export)"
  },
  "date": "2026-10-27",
- "created_at": "2026-10-27T17:30:40.529Z",
+ "created_at": "2026-10-27T17:58:49.198Z",
  "ai_generated": true,
  "disclosure": "AI-generated voice: narration synthesised with Kokoro-82M (voice af_heart). No person's voice was recorded or cloned.",
  "disclosure_rule": "Say that anything published with this narration uses an AI-generated voice: a credit line on the end card or in the post text, and keep the machine-readable marks (this file, the WAV comment tag, the VTT NOTE and the master's comment tag). Rules such as the EU AI Act's transparency duties expect synthetic audio to be labelled."

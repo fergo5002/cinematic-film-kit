@@ -118,8 +118,9 @@ export const narrate = async ({scriptText, scriptPath = null, voice, outDir, eng
 	// a written word with no sound of its own (a lone symbol) sits between its neighbours
 	for (let i = 0; i < tl.words.length; i++) {
 		if (Number.isFinite(tl.words[i].start)) continue;
-		const prev = tl.words[i - 1]?.end ?? 0;
-		Object.assign(tl.words[i], {start: prev, end: prev, source: 'interpolated'});
+		const next = tl.words.slice(i + 1).find((w) => Number.isFinite(w.start))?.start;
+		const at = i > 0 ? tl.words[i - 1].end : (next ?? o.lead);
+		Object.assign(tl.words[i], {start: at, end: at, source: 'interpolated'});
 	}
 	const buf = new Float32Array(Math.round(tl.duration * SR));
 	for (const s of tl.segments) {
@@ -154,7 +155,7 @@ export const narrate = async ({scriptText, scriptPath = null, voice, outDir, eng
 	const spoken = tl.segments.reduce((a, s) => a + s.flat.length, 0);
 	const speechSeconds = tl.segments.reduce((a, s) => a + s.duration, 0);
 	const {engine: engineInfo, model, runtime} = engine.describe();
-	const sha = createHash('sha256').update(scriptText).digest('hex');
+	const sha = createHash('sha256').update(scriptText, 'utf8').digest('hex');
 	const meta = assertDisclosure(
 		buildMeta({
 			voice,

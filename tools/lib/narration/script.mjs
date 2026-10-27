@@ -125,6 +125,7 @@ export const spokenFor = (word) => {
 };
 
 const spokenCore = (core) => {
+	if (core === '&') return 'and';
 	let m = core.match(/^([$£€])(\d[\d,]*(?:\.\d+)?)(k|mn|m|bn|b|tn|t)?$/i);
 	if (m) {
 		const [, sym, amount, scale] = m;

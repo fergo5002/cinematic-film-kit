@@ -3,6 +3,12 @@
  "note": "Written by npm run narrate -- neap from narration.txt. Times are film seconds. Do not edit by hand.",
  "voice": "af_heart",
  "disclosure": "AI-generated voice: narration synthesised with Kokoro-82M (voice af_heart). No person's voice was recorded or cloned.",
+ "script_sha256": "d7c8ee540a39a4cf32ab97785a66c0afe5cbf594e6f8c54c9f989725630c570f",
+ "settings": {
+  "voice": "af_heart",
+  "speed": 0.92,
+  "at": 66
+ },
  "duration": 18.03,
  "words": [
   {

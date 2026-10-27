@@ -1,7 +1,7 @@
 // npm run narrate -- <id>: the film's narration.txt becomes its voice track, captions and timing
 // data in the places the film, the score and the master read them, or nothing changes at all.
 import assert from 'node:assert/strict';
-import {appendFileSync, existsSync, readFileSync, writeFileSync} from 'node:fs';
+import {appendFileSync, chmodSync, existsSync, readFileSync, readdirSync, writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {test} from 'node:test';
 import {KIT, node, tempKit, writeBeatmap} from './helpers.mjs';
@@ -9,6 +9,12 @@ import {KIT, node, tempKit, writeBeatmap} from './helpers.mjs';
 const FAKE = path.join(KIT, 'tools', 'test', 'fixtures', 'narration', 'fake-engine.mjs');
 const env = {...process.env, NARRATION_ENGINE: FAKE};
 const SCRIPT = 'The sea keeps its own time.\n[pause 0.6]\nTwice a day, between the tides, it stops.\n';
+
+// Every file the narration owns, as bytes, so a test can say nothing changed.
+const snapshot = (dir, pub) => ({
+	data: readFileSync(path.join(dir, 'data', 'narration.json')),
+	...Object.fromEntries(readdirSync(pub).sort().map((f) => [f, readFileSync(path.join(pub, f))])),
+});
 
 const film = (t, {frames = 30 * 12, narration = "{voice: 'bf_test', at: 45}"} = {}) => {
 	const kit = tempKit(t);
@@ -45,12 +51,40 @@ test('flags override the beatmap, and the speed can never go above 1.0', (t) => 
 });
 
 test('a narration longer than the film is refused, and the film keeps the narration it had', (t) => {
-	const {kit, dir, pub} = film(t, {frames: 30 * 3});
+	const {kit, dir, pub} = film(t);
+	const run = () => node([path.join(kit, 'tools', 'narrate.mjs'), 'tide'], {cwd: kit, env});
+	assert.equal(run().status, 0);
+	const before = snapshot(dir, pub);
+	writeFileSync(path.join(dir, 'narration.txt'), `${SCRIPT}${'And the sea keeps on keeping its own long slow time.\n'.repeat(12)}`);
+	const r = run();
+	assert.notEqual(r.status, 0);
+	assert.match(r.stderr, /runs to .* but the film is 12(\.0+)? s/);
+	assert.match(r.stderr, /cut words or give the picture more time/);
+	assert.deepEqual(snapshot(dir, pub), before, 'the old voice and its timings are untouched');
+	assert.ok(!existsSync(path.join(kit, 'out', 'tide', '.narration-tmp')));
+});
+
+test('if the new narration cannot be put in place, the old voice and its timings stay together', (t) => {
+	const {kit, dir, pub} = film(t);
+	const run = () => node([path.join(kit, 'tools', 'narrate.mjs'), 'tide'], {cwd: kit, env});
+	assert.equal(run().status, 0);
+	const before = snapshot(dir, pub);
+	writeFileSync(path.join(dir, 'narration.txt'), 'Go when the water rests, and not before.\n');
+	chmodSync(path.join(dir, 'data'), 0o555); // the timings cannot be written
+	const r = run();
+	chmodSync(path.join(dir, 'data'), 0o755);
+	assert.notEqual(r.status, 0);
+	assert.deepEqual(snapshot(dir, pub), before, 'a half-swapped narration would pair the new voice with the old words');
+	assert.deepEqual(readdirSync(path.dirname(pub)).sort(), ['narration'], 'no backup or staging folder left behind');
+});
+
+test('a script that is not UTF-8 is refused with what to do, not voiced with replacement characters', (t) => {
+	const {kit, dir, pub} = film(t);
+	writeFileSync(path.join(dir, 'narration.txt'), Buffer.from([0x54, 0x77, 0x6f, 0x20, 0xa3, 0x35, 0x30, 0x20, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x2e, 0x0a])); // "Two \u00a350 tickets." in cp1252
 	const r = node([path.join(kit, 'tools', 'narrate.mjs'), 'tide'], {cwd: kit, env});
 	assert.notEqual(r.status, 0);
-	assert.match(r.stderr, /runs to .* but the film is 3(\.0+)? s/);
-	assert.match(r.stderr, /cut words or give the picture more time/);
-	assert.ok(!existsSync(pub) && !existsSync(path.join(dir, 'data', 'narration.json')), 'nothing written');
+	assert.match(r.stderr, /not UTF-8/);
+	assert.ok(!existsSync(pub));
 });
 
 test('a film without narration.txt, or a kit without the narration packages, says what to do', (t) => {

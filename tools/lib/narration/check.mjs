@@ -14,6 +14,7 @@ import {existsSync, readFileSync, readdirSync, statSync} from 'node:fs';
 import path from 'node:path';
 import {speechSpans} from './spans.mjs';
 import {DISCLOSURE_PREFIX} from './meta.mjs';
+import {resolveSettings} from './settings.mjs';
 
 export const MIN_VOICE_LEAD_DB = 10;
 const SR = 48000;
@@ -71,7 +72,26 @@ const filmSources = (dir) => {
 	return out.join('\n');
 };
 
-export const checkNarration = (root, id) => {
+// `film` is what the beatmap says now ({narration: its NARRATION export, fps}); without it the
+// settings are not compared. A damaged record fails the step; it never crashes the release.
+export const checkNarration = (root, id, film = null) => {
+	try {
+		return check(root, id, film);
+	} catch (err) {
+		const msg = `the narration could not be checked: ${err.message.split('\n')[0]}. Run npm run narrate -- ${id}`;
+		return {status: 'FAIL', detail: msg, problems: [msg], notes: []};
+	}
+};
+
+const readJson = (file, root) => {
+	try {
+		return JSON.parse(readFileSync(file, 'utf8'));
+	} catch (err) {
+		throw new Error(`${path.relative(root, file).split(path.sep).join('/')} is not valid JSON (${err.message})`);
+	}
+};
+
+const check = (root, id, film) => {
 	const p = paths(root, id);
 	if (![p.script, p.data, p.meta].some(existsSync)) return {status: 'PASS', detail: 'no narration', problems: [], notes: []};
 	const problems = [];
@@ -81,12 +101,19 @@ export const checkNarration = (root, id) => {
 		const list = missing.map((f) => path.relative(root, f).split(path.sep).join('/'));
 		return {status: 'FAIL', detail: `missing ${list.join(', ')}: run npm run narrate -- ${id}`, problems: list.map((f) => `${f} is missing`), notes};
 	}
-	const meta = JSON.parse(readFileSync(p.meta, 'utf8'));
+	const meta = readJson(p.meta, root);
 	const disclosure = meta.disclosure;
 	if (meta.ai_generated !== true || typeof disclosure !== 'string' || !disclosure.startsWith(DISCLOSURE_PREFIX)) problems.push(`public/films/${id}/narration/meta.json has no AI-voice disclosure: run npm run narrate -- ${id}`);
 	const sha = createHash('sha256').update(readFileSync(p.script)).digest('hex');
 	if (meta.script?.sha256 !== sha) problems.push(`src/films/${id}/narration.txt has changed since it was voiced: run npm run narrate -- ${id}, then npm run score -- ${id}`);
-	const data = JSON.parse(readFileSync(p.data, 'utf8'));
+	const data = readJson(p.data, root);
+	if (data.script_sha256 !== undefined && data.script_sha256 !== meta.script?.sha256) problems.push(`src/films/${id}/data/narration.json and the voice come from different runs: run npm run narrate -- ${id}`);
+	if (film && data.settings) {
+		const want = resolveSettings(film.narration ?? {}, film.fps);
+		for (const k of ['voice', 'speed', 'at']) {
+			if (want[k] !== data.settings[k]) problems.push(`NARRATION.${k} in beatmap.ts is ${want[k]} but the narration was voiced with ${data.settings[k]}: run npm run narrate -- ${id}, or set it back`);
+		}
+	}
 	if (data.disclosure !== disclosure) problems.push(`src/films/${id}/data/narration.json and the narration record disagree: run npm run narrate -- ${id}`);
 	const src = filmSources(p.film);
 	if (!/narration\/narration\.wav|<Narration\b/.test(src)) problems.push(`the film never plays its voice: add <Audio src={staticFile('films/${id}/narration/narration.wav')} /> (or <Narration>) to the composition`);

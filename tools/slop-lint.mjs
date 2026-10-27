@@ -272,7 +272,7 @@ for (const file of files) {
 		for (const face of flagged) report('overused-font', 'warn', n, fontMsg(face));
 
 		// copy (string literals and JSX text only, roughly)
-		const isCopyFile = ['.json', '.md'].includes(ext) || isCode;
+		const isCopyFile = ['.json', '.md'].includes(ext) || isCode || path.basename(file) === 'narration.txt';
 		if (isCopyFile && !isComment) {
 			const strings = isCode ? [...l.matchAll(/(['"`])((?:\\.|(?!\1).)*)\1|>([^<>{}]{3,})</g)].map((m) => m[2] ?? m[3] ?? '') : [l];
 			// bare JSX text on its own line: words and spaces, no code punctuation

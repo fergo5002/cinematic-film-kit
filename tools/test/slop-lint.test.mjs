@@ -144,3 +144,11 @@ test('a film\'s narration script is linted too: an em dash in it is an error, as
 	const dashes = report.findings.filter((f) => f.rule === 'em-dash');
 	assert.deepEqual(dashes.map((f) => [f.file, f.line, f.sev]), [['narration.txt', 2, 'error']]);
 });
+
+test('the copy rules read a narration script too: it is what the voice says and the captions show', (t) => {
+	const tmp = mkdtempSync(path.join(os.tmpdir(), 'slop-narr-copy-'));
+	t.after(() => rmSync(tmp, {recursive: true, force: true}));
+	writeFileSync(path.join(tmp, 'narration.txt'), 'Introducing a seamless way to unlock the tides.\n');
+	const {report} = run(tmp);
+	assert.ok(report.findings.some((f) => f.rule === 'slop-copy' && f.file === 'narration.txt'), JSON.stringify(report.findings));
+});

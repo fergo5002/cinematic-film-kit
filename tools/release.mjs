@@ -106,7 +106,7 @@ main(async () => {
 			return r.code === 0 ? {status: STATUS.PASS, detail: lastLines(r.tail, 1)} : {status: STATUS.FAIL, detail: lastLines(r.tail)};
 		}],
 		['narration', async () => {
-			const r = checkNarration(ROOT, id);
+			const r = checkNarration(ROOT, id, {narration: beat.module.NARRATION, fps: beat.fps});
 			for (const p of r.problems) console.log(`FAIL  ${p}`);
 			for (const n of r.notes) console.log(`note  ${n}`);
 			console.log(r.detail);

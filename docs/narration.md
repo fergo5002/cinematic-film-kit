@@ -42,8 +42,9 @@ want one copy for several kits.
    Without it the kit uses `af_heart` at speed 1, starting at 0.2 s. `npm run narrate -- --voices`
    lists the 28 voices: names starting `a` are American, `b` British; `f` and `m` are the
    gender; the grade is Kokoro's own.
-3. `npm run narrate -- <id>`. Flags win over the beatmap: `--voice`, `--speed`, `--gap`, `--tail`,
-   `--timings auto|engine|proportional`.
+3. `npm run narrate -- <id>`. Flags win over the beatmap for trying things out: `--voice`,
+   `--speed`, `--gap`, `--tail`, `--timings auto|engine|proportional`. Put the voice, speed and
+   start you keep in the beatmap: the release gate fails a narration voiced with anything else.
 4. `npm run score -- <id>`, so the bed ducks under the new lines.
 5. Use it in the film (below), then preview, render, master and release as usual.
 
@@ -51,13 +52,14 @@ It writes:
 
 | File | What |
 |---|---|
-| `public/films/<id>/narration/narration.wav` | the voice: mono, 48 kHz, 24-bit, -16 LUFS, true peak at or under -1.5 dBTP, starting at film time 0 so it lines up with frame 0; the disclosure in its comment tag |
+| `public/films/<id>/narration/narration.wav` | the voice: mono, 48 kHz, 24-bit, -19 LUFS (it reads -16, the film's target, once it plays on both channels), true peak at or under -1.5 dBTP, starting at film time 0 so it lines up with frame 0; the disclosure in its comment tag |
 | `public/films/<id>/narration/captions.srt`, `captions.vtt` | captions in film time, at most two lines of 42 characters; the VTT carries the disclosure as a `NOTE` |
 | `public/films/<id>/narration/meta.json` | what made it (engine, model, revision and hash, voice, settings, versions), the script's hash, pace, loudness, timing checks and the disclosure |
 | `src/films/<id>/data/narration.json` | every written word, caption cue and pause in film seconds, for the picture and the score |
 
-Nothing is written unless the whole run succeeds. A narration whose last word ends later than
-0.3 s before the end of the film is refused.
+Nothing is written unless the whole run succeeds, and the voice and its timings are always
+replaced together. A narration whose last word ends later than 0.3 s before the end of the film is
+refused. The script must be saved as UTF-8.
 
 ## The script
 
@@ -152,7 +154,8 @@ under 0.35 s stay ducked, so the bed does not pump between words. `npm run rende
 `npm run master -- <id>` writes the disclosure into the master's comment tag and puts the captions
 beside it as `out/<id>/<id>.srt` and `.vtt`. The release gate's `narration` step then checks that:
 
-- everything narrate writes is there and was voiced from `narration.txt` as it is now;
+- everything narrate writes is there, from one run, and was voiced from `narration.txt` as it is
+  now with the beatmap's `NARRATION` settings;
 - the film plays `narration.wav`;
 - the master carries the disclosure and its captions sit beside it;
 - the voice leads the bed by at least 10 dB under speech, measured on the two stems. A `volume`

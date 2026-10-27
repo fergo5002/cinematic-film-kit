@@ -71,3 +71,11 @@ test('an unknown voice or an empty script is refused with what to do instead', a
 	await assert.rejects(narrate({scriptText: SCRIPT, voice: 'xx_nobody', outDir: tempDir(t, 'narr-v-'), engine}), /unknown voice "xx_nobody".*bf_test/);
 	await assert.rejects(narrate({scriptText: '# only a comment\n', voice: 'bf_test', outDir: tempDir(t, 'narr-e-'), engine, log: () => {}}), /no speech/);
 });
+
+test('a written word with no sound of its own sits where the voice is, not at the start of the file', async (t) => {
+	const engine = await loadEngine();
+	const r = await narrate({scriptText: '/ the sea keeps its own time.\n', voice: 'bf_test', outDir: tempDir(t, 'narr-sym-'), engine, lead: 1.5});
+	assert.equal(r.words[0].text, '/');
+	assert.ok(r.words[0].start >= 1.45, `"/" placed at ${r.words[0].start} s, before the voice starts`);
+	assert.ok(r.cues[0].start >= 1.45, `first cue at ${r.cues[0].start} s`);
+});

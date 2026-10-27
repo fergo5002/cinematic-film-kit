@@ -7,13 +7,15 @@
 //   npm run narrate -- --voices     list the voices
 //   npm run narrate -- <id>         voice src/films/<id>/narration.txt
 //
-// Writes public/films/<id>/narration/ (narration.wav: 48 kHz, 24-bit, mono, -16 LUFS, and
+// Writes public/films/<id>/narration/ (narration.wav: 48 kHz, 24-bit, mono, -19 LUFS, which reads
+// -16 once it plays on both channels of the film, and
 // captions.srt, captions.vtt, meta.json) and src/films/<id>/data/narration.json (every word, cue
 // and pause in film seconds, for the picture and the score). The voice starts at the beatmap's
 // NARRATION.at frame, so narration.wav lines up with the film from frame 0.
 //
 // Settings: the beatmap's optional `export const NARRATION = {voice: 'af_heart', speed: 1, at: 15}`
-// and these flags, which win: --voice, --speed (0.85 to 1.0: narration is never sped up), --gap
+// and these flags, which win for trying things out: --voice, --speed (0.85 to 1.0: narration is
+// never sped up; the release gate expects the final choice in the beatmap), --gap
 // (silence between lines without a pause mark, default 0.45 s), --tail, --timings
 // auto|engine|proportional.
 //
@@ -21,13 +23,14 @@
 // film is refused: cut words or give the picture more time.
 import {spawnSync} from 'node:child_process';
 import {existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {ROOT, UsageError, filmDir, filmPublicDir, loadBeatmap, main, outDir, parseArgs, rel, requireFilm} from './lib/kit.mjs';
 import {fetchModel} from './lib/narration/model.mjs';
 import {narrate} from './lib/narration/pipeline.mjs';
+import {resolveSettings} from './lib/narration/settings.mjs';
 
-export const DEFAULT_VOICE = 'af_heart';
 const NARRATION_DIR = path.join(ROOT, 'narration');
 const SETUP = 'npm run narrate -- --setup';
 // Spoken words a minute from the first word to the last, pauses included: what a viewer hears.
@@ -72,10 +75,19 @@ main(async () => {
 	const id = requireFilm(positional[0]);
 	const scriptFile = path.join(filmDir(id), 'narration.txt');
 	if (!existsSync(scriptFile)) throw new UsageError(`src/films/${id}/narration.txt does not exist. Write the script there first: one sentence or phrase per line, [pause 0.6] for a set silence (docs/narration.md).`);
+	let scriptText;
+	try {
+		// fatal: a byte that is not UTF-8 is an error, never a replacement character in the voice.
+		// ignoreBOM keeps a byte-order mark in the text, so the text hashes to the file's own bytes.
+		scriptText = new TextDecoder('utf-8', {fatal: true, ignoreBOM: true}).decode(readFileSync(scriptFile));
+	} catch {
+		throw new UsageError(`src/films/${id}/narration.txt is not UTF-8. Save it as UTF-8 (most editors have it under "Save with encoding") and run this again.`);
+	}
 	const beat = await loadBeatmap(id);
 	const cfg = beat.module.NARRATION ?? {};
-	const voice = typeof flags.voice === 'string' ? flags.voice : (cfg.voice ?? DEFAULT_VOICE);
-	const at = Number(cfg.at ?? Math.round(0.2 * beat.fps));
+	const base = resolveSettings(cfg, beat.fps);
+	const voice = typeof flags.voice === 'string' ? flags.voice : base.voice;
+	const at = base.at;
 	if (!Number.isFinite(at) || at < 0 || at >= beat.duration) throw new UsageError(`NARRATION.at in src/films/${id}/beatmap.ts must be a frame inside the film (0 to ${beat.duration - 1})`);
 	const engine = await loadEngine();
 
@@ -84,14 +96,14 @@ main(async () => {
 	let r;
 	try {
 		r = await narrate({
-			scriptText: readFileSync(scriptFile, 'utf8'),
+			scriptText,
 			scriptPath: rel(scriptFile),
 			voice,
 			outDir: stage,
 			engine,
 			log: (m) => console.error(`  ${m}`),
 			lead: at / beat.fps,
-			speed: num(flags.speed, 'speed') ?? cfg.speed,
+			speed: num(flags.speed, 'speed') ?? base.speed,
 			gap: num(flags.gap, 'gap') ?? cfg.gap,
 			tail: num(flags.tail, 'tail') ?? cfg.tail,
 			timings: typeof flags.timings === 'string' ? flags.timings : cfg.timings,
@@ -106,24 +118,44 @@ main(async () => {
 		return 1;
 	}
 
-	// Only now replace the film's narration: a failed run above leaves the old one in place.
+	// Only now replace the film's narration, and only as a pair: the voice in public/ and the
+	// timings in data/ always come from the same run. Anything that fails below puts the old pair back.
 	const pub = path.join(filmPublicDir(id), 'narration');
-	rmSync(pub, {recursive: true, force: true});
-	mkdirSync(path.dirname(pub), {recursive: true});
-	renameSync(stage, pub);
 	const data = path.join(filmDir(id), 'data', 'narration.json');
-	mkdirSync(path.dirname(data), {recursive: true});
 	const record = {
 		version: 1,
 		note: `Written by npm run narrate -- ${id} from narration.txt. Times are film seconds. Do not edit by hand.`,
 		voice,
 		disclosure: r.disclosure,
+		script_sha256: createHash('sha256').update(scriptText, 'utf8').digest('hex'),
+		settings: {voice, speed: r.meta.settings.speed, at},
 		duration: r.duration,
 		words: r.words.map(({text, start, end, line, source}) => ({text, start, end, line, source})),
 		cues: r.cues,
 		pauses: r.pauses,
 	};
-	writeFileSync(data, `${JSON.stringify(record, null, 1)}\n`);
+	const dataTmp = path.join(path.dirname(data), '.narration.json.tmp');
+	const backup = `${pub}.previous`;
+	let moved = false;
+	try {
+		mkdirSync(path.dirname(data), {recursive: true});
+		writeFileSync(dataTmp, `${JSON.stringify(record, null, 1)}\n`);
+		mkdirSync(path.dirname(pub), {recursive: true});
+		rmSync(backup, {recursive: true, force: true});
+		if (existsSync(pub)) renameSync(pub, backup);
+		moved = true;
+		renameSync(stage, pub);
+		renameSync(dataTmp, data);
+	} catch (err) {
+		if (moved) {
+			rmSync(pub, {recursive: true, force: true});
+			if (existsSync(backup)) renameSync(backup, pub);
+		}
+		for (const f of [dataTmp, stage]) rmSync(f, {recursive: true, force: true});
+		console.error(`narrate: could not put the new narration in place (${err.message}); the film keeps the narration it had.`);
+		return 1;
+	}
+	rmSync(backup, {recursive: true, force: true});
 
 	const m = r.meta;
 	console.log(`${rel(pub)}/narration.wav: ${m.speech.spoken_words} spoken words, from ${r.words[0].start.toFixed(2)} s to ${r.words.at(-1).end.toFixed(2)} s; the film runs ${beat.seconds} s`);

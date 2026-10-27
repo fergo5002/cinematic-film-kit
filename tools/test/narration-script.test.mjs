@@ -64,6 +64,7 @@ test('currency, percentages and years are spoken in full, British style', () => 
 	assert.equal(spokenFor('2026'), 'twenty twenty-six');
 	assert.equal(spokenFor('2000'), 'two thousand');
 	assert.equal(spokenFor('harbour,'), 'harbour,');
+	assert.equal(spokenFor('&'), 'and', 'a bare ampersand is said as a word');
 });
 
 test('numberToWords says "and" after hundreds', () => {
