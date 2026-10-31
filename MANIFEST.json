@@ -258,6 +258,11 @@
       "sha256": "b4299dcc8404f47a0e7c0550903fde8c20f9b315bcde360fbadb9c73fd79d86f"
     },
     {
+      "path": ".github/readme/hark.gif",
+      "bytes": 2697309,
+      "sha256": "2fb035717b27abf2db55ca85be0775b840a316c946da7eaf3049898a8aedf934"
+    },
+    {
       "path": ".github/workflows/ci.yml",
       "bytes": 909,
       "sha256": "c11edabe82f6912dc2267c497c30b62c8456f6732eca0a5b16b19bedb2b32c44"
@@ -294,8 +299,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6739,
-      "sha256": "b44040f0b345ef0ea40b63325c18ea2381755b665c58ba796912f21d2ef3bdb1"
+      "bytes": 6798,
+      "sha256": "36ffe53738ec9e6c2a202d40551a6630d10e912232e7bfb83e65d5aa8cc0c209"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
